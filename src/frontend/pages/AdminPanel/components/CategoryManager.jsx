@@ -7,7 +7,7 @@ import { useConfigContext } from '../../../contexts/ConfigContextProvider';
 import styles from './CategoryManager.module.css';
 
 const CategoryManager = () => {
-  const { categories: categoriesFromContext, updateCategoriesFromAdmin } = useAllProductsContext();
+  const { categories: categoriesFromContext } = useAllProductsContext();
   const { updateCategories } = useConfigContext();
   const [localCategories, setLocalCategories] = useState([]);
   const [editingCategory, setEditingCategory] = useState(null);
@@ -48,6 +48,7 @@ const CategoryManager = () => {
     }
   };
 
+  // GUARDAR CAMBIOS EN MEMORIA LOCAL Y SINCRONIZAR
   const handleSubmit = (e) => {
     e.preventDefault();
     
@@ -77,28 +78,24 @@ const CategoryManager = () => {
       ...categoryForm,
       _id: editingCategory ? editingCategory._id : uuid(),
       categoryName: categoryForm.categoryName.toLowerCase().trim(),
-      id: editingCategory ? editingCategory.id : (localCategories.length + 1).toString()
     };
 
     let updatedCategories;
     if (editingCategory) {
       updatedCategories = localCategories.map(c => c._id === editingCategory._id ? newCategory : c);
-      toastHandler(ToastType.Success, '✅ Categoría actualizada exitosamente');
+      toastHandler(ToastType.Success, '✅ Categoría actualizada (cambios en memoria)');
     } else {
       updatedCategories = [...localCategories, newCategory];
-      toastHandler(ToastType.Success, '✅ Categoría creada exitosamente');
+      toastHandler(ToastType.Success, '✅ Categoría creada (cambios en memoria)');
     }
 
-    // SINCRONIZACIÓN COMPLETA
+    // GUARDAR EN MEMORIA LOCAL Y SINCRONIZAR
     setLocalCategories(updatedCategories);
-    
-    // Actualizar en el contexto de configuración
     updateCategories(updatedCategories);
-    
-    // Actualizar en el contexto de productos para sincronización inmediata
-    updateCategoriesFromAdmin(updatedCategories);
-    
     resetForm();
+
+    // Mostrar mensaje informativo
+    toastHandler(ToastType.Info, 'Para aplicar los cambios, ve a "💾 Exportar/Importar" y exporta la configuración');
   };
 
   const resetForm = () => {
@@ -126,38 +123,26 @@ const CategoryManager = () => {
         : c
     );
 
-    // SINCRONIZACIÓN COMPLETA
     setLocalCategories(updatedCategories);
-    
-    // Actualizar en el contexto de configuración
     updateCategories(updatedCategories);
-    
-    // Actualizar en el contexto de productos para sincronización inmediata
-    updateCategoriesFromAdmin(updatedCategories);
     
     const category = localCategories.find(c => c._id === categoryId);
     toastHandler(ToastType.Success, 
-      `✅ Categoría ${category.disabled ? 'habilitada' : 'deshabilitada'} exitosamente`
+      `✅ Categoría ${category.disabled ? 'habilitada' : 'deshabilitada'} (cambios en memoria)`
     );
+    toastHandler(ToastType.Info, 'Para aplicar los cambios, ve a "💾 Exportar/Importar" y exporta la configuración');
   };
 
   const deleteCategory = (categoryId) => {
-    if (!window.confirm('¿Estás seguro de eliminar esta categoría? Esta acción afectará todos los productos de esta categoría.')) {
+    if (!window.confirm('¿Estás seguro de eliminar esta categoría? Los cambios se guardarán en memoria.')) {
       return;
     }
 
     const updatedCategories = localCategories.filter(c => c._id !== categoryId);
-    
-    // SINCRONIZACIÓN COMPLETA
     setLocalCategories(updatedCategories);
-    
-    // Actualizar en el contexto de configuración
     updateCategories(updatedCategories);
-    
-    // Actualizar en el contexto de productos para sincronización inmediata
-    updateCategoriesFromAdmin(updatedCategories);
-    
-    toastHandler(ToastType.Success, '✅ Categoría eliminada exitosamente');
+    toastHandler(ToastType.Success, '✅ Categoría eliminada (cambios en memoria)');
+    toastHandler(ToastType.Info, 'Para aplicar los cambios, ve a "💾 Exportar/Importar" y exporta la configuración');
   };
 
   const handleCancel = () => {
@@ -180,7 +165,7 @@ const CategoryManager = () => {
         <div className={styles.headerActions}>
           {hasChanges && (
             <span className={styles.changesIndicator}>
-              🟢 Cambios aplicados en tiempo real
+              🔴 Cambios pendientes
             </span>
           )}
           <button 
@@ -194,7 +179,7 @@ const CategoryManager = () => {
 
       <div className={styles.infoBox}>
         <h4>ℹ️ Información Importante</h4>
-        <p>Los cambios se aplican automáticamente en la tienda. Para exportar los cambios permanentemente, ve a la sección "🗂️ Sistema Backup".</p>
+        <p>Los cambios se guardan temporalmente en memoria. Para aplicarlos permanentemente, ve a la sección "💾 Exportar/Importar" y exporta la configuración.</p>
       </div>
 
       {showForm && (
@@ -251,7 +236,6 @@ const CategoryManager = () => {
               onChange={handleInputChange}
               className="form-input"
               placeholder="https://ejemplo.com/imagen.jpg"
-              required
             />
             {categoryForm.categoryImage && (
               <div className={styles.imagePreview}>
@@ -262,7 +246,7 @@ const CategoryManager = () => {
 
           <div className={styles.formActions}>
             <button type="submit" className="btn btn-primary">
-              💾 {editingCategory ? 'Actualizar' : 'Crear'} Categoría
+              💾 {editingCategory ? 'Actualizar' : 'Crear'} Categoría (En Memoria)
             </button>
             <button type="button" onClick={handleCancel} className="btn btn-hipster">
               Cancelar
@@ -276,8 +260,8 @@ const CategoryManager = () => {
           <h3>Categorías Existentes ({localCategories.length})</h3>
           {hasChanges && (
             <div className={styles.changesAlert}>
-              <span>🟢 Los cambios se han aplicado en tiempo real en la tienda</span>
-              <small>Ve a "🗂️ Sistema Backup" para exportar los cambios</small>
+              <span>🔴 Hay {Math.abs(localCategories.length - categoriesFromContext.length)} cambios pendientes</span>
+              <small>Ve a "💾 Exportar/Importar" para aplicar los cambios</small>
             </div>
           )}
         </div>
