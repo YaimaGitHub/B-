@@ -1,6 +1,6 @@
 import styles from './Hero.module.css';
 
-import jethalalBanner from '../../assets/jethalalBanner.jpg';
+import jethalalBanner from '../../assets/jethalalBanner.png';
 import { Link } from 'react-router-dom';
 import { useIsMobile } from '../../hooks';
 
