@@ -36,8 +36,8 @@ export const SORT_TYPE = {
 export const RATINGS = [4, 3, 2, 1];
 
 export const TEST_USER = {
-  email: 'yero.shop@gmail.com',
-  password: 'yero1234',
+  email: 'jethalal.gada@gmail.com',
+  password: 'babitaji1234',
 };
 
 export const SUPER_ADMIN = {
@@ -113,53 +113,53 @@ export const SERVICE_TYPES = {
 export const SANTIAGO_ZONES = [
   {
     "id": "centro",
-    "name": "Nuevo Vista Alegre",
-    "cost": 100
+    "name": "Centro Histórico",
+    "cost": 50
   },
   {
     "id": "vista_alegre",
     "name": "Vista Alegre",
-    "cost": 500
+    "cost": 75
   },
   {
     "id": "sueno",
     "name": "Sueño",
-    "cost": 300
+    "cost": 60
   },
   {
     "id": "san_pedrito",
     "name": "San Pedrito",
-    "cost": 250
+    "cost": 80
   },
   {
     "id": "altamira",
     "name": "Altamira",
-    "cost": 500
+    "cost": 70
   },
   {
     "id": "reparto_flores",
     "name": "Reparto Flores",
-    "cost": 350
+    "cost": 65
   },
   {
     "id": "chicharrones",
     "name": "Chicharrones",
-    "cost": 400
+    "cost": 85
   },
   {
     "id": "los_olmos",
     "name": "Los Olmos",
-    "cost": 350
+    "cost": 90
   },
   {
     "id": "santa_barbara",
     "name": "Santa Bárbara",
-    "cost": 500
+    "cost": 95
   },
   {
     "id": "micro_9",
-    "name": "Micro 7, 8 , 9",
-    "cost": 500
+    "name": "Micro 9",
+    "cost": 100
   },
   {
     "id": "micro_4",
@@ -169,75 +169,50 @@ export const SANTIAGO_ZONES = [
   {
     "id": "alameda",
     "name": "Alameda",
-    "cost": 250
+    "cost": 55
   },
   {
-    "id": "abel_santamaria",
-    "name": "Abel Santamaria",
-    "cost": 800
+    "id": "puerto",
+    "name": "Puerto",
+    "cost": 45
   },
   {
-    "id": "el_caney",
-    "name": "El Caney",
-    "cost": 800
+    "id": "siboney",
+    "name": "Siboney",
+    "cost": 120
   },
   {
-    "id": "boniato",
-    "name": "Boniato",
-    "cost": 800
-  },
-  {
-    "id": "los_cangrejitos",
-    "name": "Los cangrejitos",
-    "cost": 350
-  },
-  {
-    "id": "trocha",
-    "name": "Trocha",
-    "cost": 350
-  },
-  {
-    "id": "versalles",
-    "name": "Versalles",
-    "cost": 800
-  },
-  {
-    "id": "reparto_militar_(la_ceiba)",
-    "name": "Reparto Militar (la ceiba)",
-    "cost": 500
-  },
-  {
-    "id": "rajayoga",
-    "name": "Rajayoga",
-    "cost": 400
+    "id": "ciudamar",
+    "name": "Ciudamar",
+    "cost": 110
   }
 ];
 
 // Cupones de descuento - ACTUALIZADOS
 export const COUPONS = [
   {
-    "couponCode": "YERO - VIP",
+    "couponCode": "PEPEP",
     "text": "100% Descuento",
     "discountPercent": 55,
-    "minCartPriceRequired": 250000,
+    "minCartPriceRequired": 150000,
     "id": "b6c7a585-79a2-4fde-93cd-80422ef3acfa"
   },
   {
-    "couponCode": "YERO - EXCLUSIVO",
+    "couponCode": "PEPE 2",
     "text": "20% Descuento",
     "discountPercent": 20,
-    "minCartPriceRequired": 200000,
+    "minCartPriceRequired": 100000,
     "id": "ecdff7ad-f653-467f-9257-7fcd0fdea3a8"
   },
   {
-    "couponCode": "YERO - SECRETO",
+    "couponCode": "PEPE 3",
     "text": "10% Descuento",
     "discountPercent": 10,
-    "minCartPriceRequired": 150000,
+    "minCartPriceRequired": 50000,
     "id": "4898bd1c-7227-47b0-b6fe-32159f71072b"
   },
   {
-    "couponCode": "YERO - LIMITADO",
+    "couponCode": "PEPE 4",
     "text": "5% Descuento",
     "discountPercent": 5,
     "minCartPriceRequired": 20000,
@@ -258,7 +233,7 @@ export const STORE_WHATSAPP = '+53 54690878';
 
 // Configuración por defecto de la tienda - ACTUALIZADA
 export const DEFAULT_STORE_CONFIG = {
-  "storeName": "Yero Shop!",
+  "storeName": "Gada Electronicssss",
   "whatsappNumber": "+53 54690878",
   "storeAddressId": "store-main-address"
 };
