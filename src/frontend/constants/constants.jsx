@@ -191,28 +191,28 @@ export const SANTIAGO_ZONES = [
 // Cupones de descuento - ACTUALIZADOS
 export const COUPONS = [
   {
-    "couponCode": "PEPEP",
+    "couponCode": "YERO - VIP",
     "text": "100% Descuento",
     "discountPercent": 55,
-    "minCartPriceRequired": 150000,
+    "minCartPriceRequired": 300000,
     "id": "b6c7a585-79a2-4fde-93cd-80422ef3acfa"
   },
   {
-    "couponCode": "PEPE 2",
+    "couponCode": "YERO - EXCLUSIVO",
     "text": "20% Descuento",
     "discountPercent": 20,
-    "minCartPriceRequired": 100000,
+    "minCartPriceRequired": 250000,
     "id": "ecdff7ad-f653-467f-9257-7fcd0fdea3a8"
   },
   {
-    "couponCode": "PEPE 3",
+    "couponCode": "YERO - SECRETO",
     "text": "10% Descuento",
     "discountPercent": 10,
     "minCartPriceRequired": 50000,
     "id": "4898bd1c-7227-47b0-b6fe-32159f71072b"
   },
   {
-    "couponCode": "PEPE 4",
+    "couponCode": "YERO - LIMITADO",
     "text": "5% Descuento",
     "discountPercent": 5,
     "minCartPriceRequired": 20000,
@@ -233,7 +233,7 @@ export const STORE_WHATSAPP = '+53 54690878';
 
 // Configuración por defecto de la tienda - ACTUALIZADA
 export const DEFAULT_STORE_CONFIG = {
-  "storeName": "Gada Electronicssss",
+  "storeName": "Yero Shop!",
   "whatsappNumber": "+53 54690878",
   "storeAddressId": "store-main-address"
 };
