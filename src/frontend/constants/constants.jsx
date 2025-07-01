@@ -191,28 +191,28 @@ export const SANTIAGO_ZONES = [
 // Cupones de descuento - ACTUALIZADOS
 export const COUPONS = [
   {
-    "couponCode": "YERO - VIP",
+    "couponCode": "PEPEP",
     "text": "100% Descuento",
     "discountPercent": 55,
-    "minCartPriceRequired": 300000,
+    "minCartPriceRequired": 150000,
     "id": "b6c7a585-79a2-4fde-93cd-80422ef3acfa"
   },
   {
     "couponCode": "PEPE 2",
     "text": "20% Descuento",
     "discountPercent": 20,
-    "minCartPriceRequired": 200000,
+    "minCartPriceRequired": 100000,
     "id": "ecdff7ad-f653-467f-9257-7fcd0fdea3a8"
   },
   {
-    "couponCode": "YERO - LIMITADO",
+    "couponCode": "PEPE 3",
     "text": "10% Descuento",
     "discountPercent": 10,
     "minCartPriceRequired": 50000,
     "id": "4898bd1c-7227-47b0-b6fe-32159f71072b"
   },
   {
-    "couponCode": "YERO - SECRETO",
+    "couponCode": "PEPE 4",
     "text": "5% Descuento",
     "discountPercent": 5,
     "minCartPriceRequired": 20000,
