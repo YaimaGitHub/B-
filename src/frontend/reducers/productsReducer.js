@@ -13,14 +13,14 @@ export const initialProductsState = {
   },
   addressList: [
     {
-      addressId: 'Yero',
-      username: 'Yero Shop',
-      mobile: +5354690878,
-      alternate: +5354690878,
-      city: 'Cuba',
-      state: 'Santiago de Cuba',
+      addressId: 'abc',
+      username: 'Swastik Patro',
+      mobile: 9203874811,
+      alternate: 9370818549,
+      city: 'kalyan',
+      state: 'Maharashtra',
       pincode: 421306,
-      addressInfo: 'Calle 11 /32 y 40 Edif28 Apt. 4 y 6',
+      addressInfo: '9133 Kessler Grove Apt. 325',
     },
   ],
 };
@@ -50,6 +50,20 @@ export const productsReducer = (state, action) => {
         ...state,
         isDataLoading: false,
         isDataError: true,
+      };
+    }
+
+    case PRODUCTS_ACTION.UPDATE_PRODUCTS_FROM_CONFIG: {
+      return {
+        ...state,
+        products: [...action.payload.products],
+      };
+    }
+
+    case PRODUCTS_ACTION.UPDATE_CATEGORIES_FROM_CONFIG: {
+      return {
+        ...state,
+        categories: [...action.payload.categories],
       };
     }
 
@@ -94,21 +108,6 @@ export const productsReducer = (state, action) => {
       return {
         ...state,
         wishlist: [...action.payload.wishlist],
-      };
-    }
-
-    // NUEVAS ACCIONES PARA SINCRONIZACIÓN DEL ADMIN
-    case PRODUCTS_ACTION.UPDATE_PRODUCTS_FROM_ADMIN: {
-      return {
-        ...state,
-        products: [...action.payload.products],
-      };
-    }
-
-    case PRODUCTS_ACTION.UPDATE_CATEGORIES_FROM_ADMIN: {
-      return {
-        ...state,
-        categories: [...action.payload.categories],
       };
     }
 

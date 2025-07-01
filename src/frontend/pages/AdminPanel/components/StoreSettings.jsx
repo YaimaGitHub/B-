@@ -7,7 +7,7 @@ import styles from './StoreSettings.module.css';
 const StoreSettings = () => {
   const { storeConfig, updateStoreInfo, updateZones } = useConfigContext();
   const [storeSettings, setStoreSettings] = useState({
-    storeName: 'Yero Shop!',
+    storeName: 'Gada Electronics',
     whatsappNumber: '+53 54690878',
     storeAddressId: 'store-main-address',
   });
@@ -21,7 +21,7 @@ const StoreSettings = () => {
   useEffect(() => {
     if (storeConfig.storeInfo) {
       setStoreSettings({
-        storeName: storeConfig.storeInfo.storeName || 'Yero Shop!',
+        storeName: storeConfig.storeInfo.storeName || 'Gada Electronics',
         whatsappNumber: storeConfig.storeInfo.whatsappNumber || '+53 54690878',
         storeAddressId: storeConfig.storeInfo.storeAddressId || 'store-main-address',
       });
