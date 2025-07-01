@@ -7,13 +7,12 @@ import { ToastType } from '../../../constants/constants';
 import styles from './ProductManager.module.css';
 
 const ProductManager = () => {
-  const { products, categories } = useAllProductsContext();
+  const { products, categories, updateProductsFromAdmin } = useAllProductsContext();
   const { updateProducts } = useConfigContext();
   const [localProducts, setLocalProducts] = useState([]);
   const [selectedProduct, setSelectedProduct] = useState(null);
   const [isEditing, setIsEditing] = useState(false);
   const [hasUnsavedChanges, setHasUnsavedChanges] = useState(false);
-  
   const [formData, setFormData] = useState({
     name: '',
     price: '',
@@ -112,8 +111,13 @@ const ProductManager = () => {
       return;
     }
 
+    if (!formData.originalPrice || parseFloat(formData.originalPrice) <= 0) {
+      toastHandler(ToastType.Error, 'El precio original debe ser mayor a 0');
+      return;
+    }
+
     if (!formData.category) {
-      toastHandler(ToastType.Error, 'La categoría es requerida');
+      toastHandler(ToastType.Error, 'Selecciona una categoría');
       return;
     }
 
@@ -123,20 +127,32 @@ const ProductManager = () => {
     }
 
     if (!formData.image.trim()) {
-      toastHandler(ToastType.Error, 'La imagen es requerida');
+      toastHandler(ToastType.Error, 'La imagen del producto es requerida');
       return;
     }
 
-    // Crear el producto actualizado
-    const updatedProduct = {
+    // Validar colores
+    const hasValidColors = formData.colors.every(color => 
+      color.color && color.colorQuantity >= 0
+    );
+
+    if (!hasValidColors) {
+      toastHandler(ToastType.Error, 'Todos los colores deben tener una cantidad válida');
+      return;
+    }
+
+    // Calcular stock total basado en los colores
+    const totalStock = formData.colors.reduce((total, color) => total + parseInt(color.colorQuantity || 0), 0);
+
+    const newProduct = {
       _id: selectedProduct ? selectedProduct._id : uuid(),
       name: formData.name.trim(),
       price: parseFloat(formData.price),
-      originalPrice: parseFloat(formData.originalPrice) || parseFloat(formData.price),
+      originalPrice: parseFloat(formData.originalPrice),
       description: formData.description.trim(),
       category: formData.category,
       company: formData.company.trim(),
-      stock: parseInt(formData.stock) || 0,
+      stock: totalStock, // Stock calculado automáticamente
       reviewCount: parseInt(formData.reviewCount) || 0,
       stars: parseFloat(formData.stars) || 0,
       colors: formData.colors.map(color => ({
@@ -145,28 +161,29 @@ const ProductManager = () => {
       })),
       image: formData.image,
       isShippingAvailable: formData.isShippingAvailable,
-      featured: formData.featured
+      featured: formData.featured,
+      id: selectedProduct ? selectedProduct.id : (localProducts.length + 1).toString()
     };
 
     let updatedProducts;
     if (selectedProduct) {
-      updatedProducts = localProducts.map(p => 
-        p._id === selectedProduct._id ? updatedProduct : p
-      );
-      toastHandler(ToastType.Success, '✅ Producto actualizado (cambios en memoria)');
+      updatedProducts = localProducts.map(p => p._id === selectedProduct._id ? newProduct : p);
+      toastHandler(ToastType.Success, '✅ Producto actualizado exitosamente');
     } else {
-      updatedProducts = [...localProducts, updatedProduct];
-      toastHandler(ToastType.Success, '✅ Producto creado (cambios en memoria)');
+      updatedProducts = [...localProducts, newProduct];
+      toastHandler(ToastType.Success, '✅ Producto creado exitosamente');
     }
 
-    // SOLO GUARDAR EN MEMORIA LOCAL - NO EXPORTAR AUTOMÁTICAMENTE
+    // SINCRONIZACIÓN COMPLETA
     setLocalProducts(updatedProducts);
+    
+    // Actualizar en el contexto de configuración
     updateProducts(updatedProducts);
     
-    resetForm();
+    // Actualizar en el contexto de productos para sincronización inmediata
+    updateProductsFromAdmin(updatedProducts);
     
-    // Mostrar mensaje informativo
-    toastHandler(ToastType.Info, 'Para aplicar los cambios, ve a "💾 Exportar/Importar" y exporta la configuración');
+    resetForm();
   };
 
   const resetForm = () => {
@@ -200,15 +217,22 @@ const ProductManager = () => {
   };
 
   const deleteProduct = (productId) => {
-    if (!window.confirm('¿Estás seguro de eliminar este producto? Los cambios se guardarán en memoria.')) {
+    if (!window.confirm('¿Estás seguro de eliminar este producto?')) {
       return;
     }
 
     const updatedProducts = localProducts.filter(p => p._id !== productId);
+    
+    // SINCRONIZACIÓN COMPLETA
     setLocalProducts(updatedProducts);
+    
+    // Actualizar en el contexto de configuración
     updateProducts(updatedProducts);
-    toastHandler(ToastType.Success, '✅ Producto eliminado (cambios en memoria)');
-    toastHandler(ToastType.Info, 'Para aplicar los cambios, ve a "💾 Exportar/Importar" y exporta la configuración');
+    
+    // Actualizar en el contexto de productos para sincronización inmediata
+    updateProductsFromAdmin(updatedProducts);
+    
+    toastHandler(ToastType.Success, '✅ Producto eliminado exitosamente');
   };
 
   // Verificar si hay cambios pendientes
@@ -222,7 +246,7 @@ const ProductManager = () => {
         <div className={styles.headerActions}>
           {hasChanges && (
             <span className={styles.changesIndicator}>
-              🔴 Cambios pendientes
+              🟢 Cambios aplicados en tiempo real
             </span>
           )}
           <button 
@@ -236,7 +260,7 @@ const ProductManager = () => {
 
       <div className={styles.infoBox}>
         <h4>ℹ️ Información Importante</h4>
-        <p>Los cambios se guardan temporalmente en memoria. Para aplicarlos permanentemente, ve a la sección "💾 Exportar/Importar" y exporta la configuración.</p>
+        <p>Los cambios se aplican automáticamente en la tienda. Para exportar los cambios permanentemente, ve a la sección "🗂️ Sistema Backup".</p>
       </div>
 
       {isEditing ? (
@@ -280,7 +304,7 @@ const ProductManager = () => {
             </div>
 
             <div className={styles.formGroup}>
-              <label>Precio Original</label>
+              <label>Precio Original *</label>
               <input
                 type="number"
                 name="originalPrice"
@@ -290,6 +314,7 @@ const ProductManager = () => {
                 placeholder="Precio original"
                 min="0"
                 step="0.01"
+                required
               />
             </div>
 
@@ -321,19 +346,6 @@ const ProductManager = () => {
                 className="form-input"
                 placeholder="Marca"
                 required
-              />
-            </div>
-
-            <div className={styles.formGroup}>
-              <label>Stock Total</label>
-              <input
-                type="number"
-                name="stock"
-                value={formData.stock}
-                onChange={handleInputChange}
-                className="form-input"
-                placeholder="Stock"
-                min="0"
               />
             </div>
 
@@ -406,6 +418,9 @@ const ProductManager = () => {
 
           <div className={styles.colorsSection}>
             <label>Colores y Stock por Color *</label>
+            <p className={styles.stockInfo}>
+              <strong>Stock Total Calculado:</strong> {formData.colors.reduce((total, color) => total + parseInt(color.colorQuantity || 0), 0)} unidades
+            </p>
             {formData.colors.map((color, index) => (
               <div key={index} className={styles.colorRow}>
                 <input
@@ -464,7 +479,7 @@ const ProductManager = () => {
 
           <div className={styles.formActions}>
             <button onClick={handleSave} className="btn btn-primary">
-              💾 {selectedProduct ? 'Actualizar' : 'Crear'} Producto (En Memoria)
+              💾 {selectedProduct ? 'Actualizar' : 'Crear'} Producto
             </button>
             <button onClick={handleCancel} className="btn btn-danger">
               ❌ Cancelar
@@ -477,8 +492,8 @@ const ProductManager = () => {
             <h3>Productos Existentes ({localProducts.length})</h3>
             {hasChanges && (
               <div className={styles.changesAlert}>
-                <span>🔴 Hay {Math.abs(localProducts.length - products.length)} cambios pendientes</span>
-                <small>Ve a "💾 Exportar/Importar" para aplicar los cambios</small>
+                <span>🟢 Los cambios se han aplicado en tiempo real en la tienda</span>
+                <small>Ve a "🗂️ Sistema Backup" para exportar los cambios</small>
               </div>
             )}
           </div>
@@ -488,9 +503,6 @@ const ProductManager = () => {
               <div key={product._id} className={styles.productCard}>
                 <div className={styles.productImage}>
                   <img src={product.image} alt={product.name} />
-                  {product.featured && (
-                    <div className={styles.featuredBadge}>⭐ Destacado</div>
-                  )}
                 </div>
                 <div className={styles.productInfo}>
                   <h4>{product.name}</h4>
@@ -499,6 +511,10 @@ const ProductManager = () => {
                   <p className={styles.productRating}>⭐ {product.stars} ({product.reviewCount})</p>
                   <p className={styles.productCategory}>📂 {product.category}</p>
                   <p className={styles.productCompany}>🏢 {product.company}</p>
+                  <p className={styles.productShipping}>
+                    🚚 {product.isShippingAvailable ? 'Envío disponible' : 'Sin envío'}
+                  </p>
+                  {product.featured && <span className={styles.featuredBadge}>⭐ Destacado</span>}
                 </div>
                 <div className={styles.productActions}>
                   <button

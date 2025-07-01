@@ -13,7 +13,6 @@ const ConfigContextProvider = ({ children }) => {
     zones: SANTIAGO_ZONES,
     products: [],
     categories: [],
-    messages: {},
     lastModified: new Date().toISOString()
   });
 
@@ -39,13 +38,7 @@ const ConfigContextProvider = ({ children }) => {
     
     setStoreConfig(updatedConfig);
     localStorage.setItem('adminStoreConfig', JSON.stringify(updatedConfig));
-    
-    // Disparar evento personalizado para notificar cambios
-    window.dispatchEvent(new CustomEvent('storeConfigUpdated', { 
-      detail: updatedConfig 
-    }));
-    
-    toastHandler(ToastType.Success, 'Configuración guardada y sincronizada exitosamente');
+    toastHandler(ToastType.Success, 'Configuración guardada exitosamente');
   };
 
   // Actualizar cupones
@@ -78,37 +71,44 @@ const ConfigContextProvider = ({ children }) => {
     saveConfig(updatedConfig);
   };
 
-  // Actualizar productos
+  // Actualizar productos - NUEVA IMPLEMENTACIÓN
   const updateProducts = (newProducts) => {
     const updatedConfig = {
       ...storeConfig,
       products: newProducts,
       lastModified: new Date().toISOString()
     };
-    saveConfig(updatedConfig);
+    
+    // Guardar en localStorage
+    setStoreConfig(updatedConfig);
+    localStorage.setItem('adminStoreConfig', JSON.stringify(updatedConfig));
+    
+    // Actualizar también en el contexto de productos para sincronización inmediata
+    window.dispatchEvent(new CustomEvent('productsUpdated', { 
+      detail: { products: newProducts } 
+    }));
+    
+    toastHandler(ToastType.Success, 'Productos actualizados en la tienda');
   };
 
-  // Actualizar categorías
+  // Actualizar categorías - NUEVA IMPLEMENTACIÓN
   const updateCategories = (newCategories) => {
     const updatedConfig = {
       ...storeConfig,
       categories: newCategories,
       lastModified: new Date().toISOString()
     };
-    saveConfig(updatedConfig);
-  };
-
-  // Actualizar mensajes
-  const updateMessages = (newMessages) => {
-    const updatedConfig = {
-      ...storeConfig,
-      messages: newMessages,
-      lastModified: new Date().toISOString()
-    };
-    saveConfig(updatedConfig);
     
-    // Guardar también en localStorage separado para compatibilidad
-    localStorage.setItem('storeMessages', JSON.stringify(newMessages));
+    // Guardar en localStorage
+    setStoreConfig(updatedConfig);
+    localStorage.setItem('adminStoreConfig', JSON.stringify(updatedConfig));
+    
+    // Actualizar también en el contexto de productos para sincronización inmediata
+    window.dispatchEvent(new CustomEvent('categoriesUpdated', { 
+      detail: { categories: newCategories } 
+    }));
+    
+    toastHandler(ToastType.Success, 'Categorías actualizadas en la tienda');
   };
 
   // Exportar configuración
@@ -168,26 +168,11 @@ const ConfigContextProvider = ({ children }) => {
       zones: SANTIAGO_ZONES,
       products: [],
       categories: [],
-      messages: {},
       lastModified: new Date().toISOString()
     };
     
     saveConfig(defaultConfig);
-    localStorage.removeItem('storeMessages');
     toastHandler(ToastType.Success, 'Configuración restablecida a valores por defecto');
-  };
-
-  // Sincronizar con contexto de productos
-  const syncWithProductsContext = (products, categories) => {
-    const updatedConfig = {
-      ...storeConfig,
-      products: products || storeConfig.products,
-      categories: categories || storeConfig.categories,
-      lastModified: new Date().toISOString()
-    };
-    
-    setStoreConfig(updatedConfig);
-    localStorage.setItem('adminStoreConfig', JSON.stringify(updatedConfig));
   };
 
   return (
@@ -198,12 +183,10 @@ const ConfigContextProvider = ({ children }) => {
       updateStoreInfo,
       updateProducts,
       updateCategories,
-      updateMessages,
       exportConfiguration,
       importConfiguration,
       resetConfiguration,
-      saveConfig,
-      syncWithProductsContext
+      saveConfig
     }}>
       {children}
     </ConfigContext.Provider>
