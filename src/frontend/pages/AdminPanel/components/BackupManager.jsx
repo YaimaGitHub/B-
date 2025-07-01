@@ -12,6 +12,19 @@ const BackupManager = () => {
 
   // Función para generar el contenido de constants.jsx actualizado
   const generateConstantsFile = () => {
+    // Obtener datos actualizados desde localStorage
+    const savedConfig = localStorage.getItem('adminStoreConfig');
+    let finalStoreConfig = storeConfig;
+    
+    if (savedConfig) {
+      try {
+        const parsedConfig = JSON.parse(savedConfig);
+        finalStoreConfig = parsedConfig;
+      } catch (error) {
+        console.error('Error al cargar configuración guardada:', error);
+      }
+    }
+
     const constantsContent = `import { AiFillGithub, AiFillLinkedin, AiOutlineTwitter } from 'react-icons/ai';
 import { v4 as uuid } from 'uuid';
 
@@ -124,10 +137,10 @@ export const SERVICE_TYPES = {
 };
 
 // Zonas de Santiago de Cuba con costos de entrega - ACTUALIZADAS
-export const SANTIAGO_ZONES = ${JSON.stringify(storeConfig.zones || [], null, 2)};
+export const SANTIAGO_ZONES = ${JSON.stringify(finalStoreConfig.zones || [], null, 2)};
 
 // Cupones de descuento - ACTUALIZADOS
-export const COUPONS = ${JSON.stringify(storeConfig.coupons || [], null, 2)};
+export const COUPONS = ${JSON.stringify(finalStoreConfig.coupons || [], null, 2)};
 
 export const CHARGE_AND_DISCOUNT = {
   deliveryCharge: 0,
@@ -138,10 +151,10 @@ export const MIN_DISTANCE_BETWEEN_THUMBS = 1000;
 export const MAX_RESPONSES_IN_CACHE_TO_STORE = 50;
 
 // WhatsApp de la tienda - ACTUALIZADO
-export const STORE_WHATSAPP = '${storeConfig.storeInfo?.whatsappNumber || '+53 54690878'}';
+export const STORE_WHATSAPP = '${finalStoreConfig.storeInfo?.whatsappNumber || '+53 54690878'}';
 
 // Configuración por defecto de la tienda - ACTUALIZADA
-export const DEFAULT_STORE_CONFIG = ${JSON.stringify(storeConfig.storeInfo || {
+export const DEFAULT_STORE_CONFIG = ${JSON.stringify(finalStoreConfig.storeInfo || {
   storeName: 'Gada Electronics',
   whatsappNumber: '+53 54690878',
   storeAddress: 'Santiago de Cuba, Cuba',
@@ -203,24 +216,54 @@ export const COUNTRY_CODES = [
 
   // Función para generar el contenido de products.js actualizado
   const generateProductsFile = () => {
+    // Obtener productos actualizados desde localStorage o contexto
+    const savedConfig = localStorage.getItem('adminStoreConfig');
+    let productsToExport = products || [];
+    
+    if (savedConfig) {
+      try {
+        const parsedConfig = JSON.parse(savedConfig);
+        if (parsedConfig.products && parsedConfig.products.length > 0) {
+          productsToExport = parsedConfig.products;
+        }
+      } catch (error) {
+        console.error('Error al cargar productos guardados:', error);
+      }
+    }
+
     const productsContent = `/**
  * Product Database can be added here.
  * You can add products of your wish with different attributes
  * */
 
-export const products = ${JSON.stringify(products || [], null, 2)};
+export const products = ${JSON.stringify(productsToExport, null, 2)};
 `;
     return productsContent;
   };
 
   // Función para generar el contenido de categories.js actualizado
   const generateCategoriesFile = () => {
+    // Obtener categorías actualizadas desde localStorage o contexto
+    const savedConfig = localStorage.getItem('adminStoreConfig');
+    let categoriesToExport = categories || [];
+    
+    if (savedConfig) {
+      try {
+        const parsedConfig = JSON.parse(savedConfig);
+        if (parsedConfig.categories && parsedConfig.categories.length > 0) {
+          categoriesToExport = parsedConfig.categories;
+        }
+      } catch (error) {
+        console.error('Error al cargar categorías guardadas:', error);
+      }
+    }
+
     const categoriesContent = `/**
  * Category Database can be added here.
  * You can add category of your wish with different attributes
  * */
 
-export const categories = ${JSON.stringify(categories || [], null, 2)};
+export const categories = ${JSON.stringify(categoriesToExport, null, 2)};
 `;
     return categoriesContent;
   };
@@ -295,7 +338,8 @@ export const STORE_MESSAGES = ${JSON.stringify(messages, null, 2)};
       });
 
       // Agregar archivo de configuración JSON completo
-      const fullConfig = {
+      const savedConfig = localStorage.getItem('adminStoreConfig');
+      let fullConfig = {
         storeConfig,
         products,
         categories,
@@ -303,6 +347,21 @@ export const STORE_MESSAGES = ${JSON.stringify(messages, null, 2)};
         exportDate: new Date().toISOString(),
         version: '2.0.0'
       };
+
+      // Si hay configuración guardada, usarla
+      if (savedConfig) {
+        try {
+          const parsedConfig = JSON.parse(savedConfig);
+          fullConfig = {
+            ...fullConfig,
+            ...parsedConfig,
+            exportDate: new Date().toISOString(),
+            version: '2.0.0'
+          };
+        } catch (error) {
+          console.error('Error al cargar configuración guardada:', error);
+        }
+      }
       
       backupFolder.file('full-config.json', JSON.stringify(fullConfig, null, 2));
 
@@ -319,8 +378,8 @@ export const STORE_MESSAGES = ${JSON.stringify(messages, null, 2)};
       
       URL.revokeObjectURL(url);
       
-      toastHandler(ToastType.Success, '🎉 Backup exportado exitosamente con todos los cambios sincronizados');
-      toastHandler(ToastType.Info, 'Los archivos incluyen todas las modificaciones realizadas en el panel de control');
+      toastHandler(ToastType.Success, '🎉 Backup exportado exitosamente');
+      toastHandler(ToastType.Info, 'Los archivos incluyen todos los cambios realizados en productos, categorías, cupones y configuraciones');
       
     } catch (error) {
       console.error('Error al exportar backup:', error);
@@ -329,6 +388,35 @@ export const STORE_MESSAGES = ${JSON.stringify(messages, null, 2)};
       setIsExporting(false);
     }
   };
+
+  // Obtener estadísticas actualizadas
+  const getStats = () => {
+    const savedConfig = localStorage.getItem('adminStoreConfig');
+    let stats = {
+      products: products?.length || 0,
+      categories: categories?.length || 0,
+      coupons: storeConfig.coupons?.length || 0,
+      zones: storeConfig.zones?.length || 0
+    };
+
+    if (savedConfig) {
+      try {
+        const parsedConfig = JSON.parse(savedConfig);
+        stats = {
+          products: parsedConfig.products?.length || stats.products,
+          categories: parsedConfig.categories?.length || stats.categories,
+          coupons: parsedConfig.coupons?.length || stats.coupons,
+          zones: parsedConfig.zones?.length || stats.zones
+        };
+      } catch (error) {
+        console.error('Error al cargar estadísticas:', error);
+      }
+    }
+
+    return stats;
+  };
+
+  const stats = getStats();
 
   return (
     <div className={styles.backupManager}>
@@ -340,15 +428,15 @@ export const STORE_MESSAGES = ${JSON.stringify(messages, null, 2)};
           <div className={styles.infoItem}>
             <strong>📁 Archivos incluidos:</strong>
             <ul>
-              <li><code>constants.jsx</code> - Configuración de cupones, zonas y WhatsApp sincronizada</li>
-              <li><code>products.js</code> - Base de datos de productos actualizada con cambios del panel</li>
-              <li><code>categories.js</code> - Base de datos de categorías actualizada con cambios del panel</li>
-              <li><code>messages.js</code> - Todos los mensajes de la tienda sincronizados</li>
+              <li><code>constants.jsx</code> - Configuración de cupones, zonas y WhatsApp</li>
+              <li><code>products.js</code> - Base de datos de productos actualizada</li>
+              <li><code>categories.js</code> - Base de datos de categorías actualizada</li>
+              <li><code>messages.js</code> - Todos los mensajes de la tienda</li>
               <li><code>full-config.json</code> - Configuración completa en JSON</li>
             </ul>
           </div>
           <div className={styles.infoItem}>
-            <strong>🔄 Sincronización automática:</strong> Todos los cambios realizados en el panel de control se incluyen automáticamente en el backup.
+            <strong>🔄 Proceso de backup:</strong> Todos los cambios realizados en el panel se exportan a archivos actualizados manteniendo la estructura original del código fuente.
           </div>
           <div className={styles.infoItem}>
             <strong>📦 Formato:</strong> Los archivos se exportan en un archivo ZIP organizado por carpetas según la estructura del proyecto.
@@ -362,22 +450,21 @@ export const STORE_MESSAGES = ${JSON.stringify(messages, null, 2)};
       <div className={styles.exportSection}>
         <div className={styles.exportCard}>
           <div className={styles.cardHeader}>
-            <h3>📤 Exportar Backup Completo Sincronizado</h3>
+            <h3>📤 Exportar Backup Completo</h3>
           </div>
           <div className={styles.cardContent}>
             <p>
               Exporta todos los cambios realizados en el panel de control a archivos de código fuente 
-              actualizados y sincronizados. Esto incluye productos, categorías, cupones, zonas, mensajes y configuraciones.
+              actualizados. Esto incluye productos, categorías, cupones, zonas, mensajes y configuraciones.
             </p>
             <div className={styles.changesSummary}>
-              <h4>📊 Resumen de cambios sincronizados:</h4>
+              <h4>📊 Resumen de cambios a exportar:</h4>
               <ul>
-                <li>🎫 {storeConfig.coupons?.length || 0} cupones configurados</li>
-                <li>📍 {storeConfig.zones?.length || 0} zonas de entrega</li>
-                <li>📦 {products?.length || 0} productos en catálogo</li>
-                <li>📂 {categories?.length || 0} categorías disponibles</li>
+                <li>🎫 {stats.coupons} cupones configurados</li>
+                <li>📍 {stats.zones} zonas de entrega</li>
+                <li>📦 {stats.products} productos en catálogo</li>
+                <li>📂 {stats.categories} categorías disponibles</li>
                 <li>💬 {Object.keys(JSON.parse(localStorage.getItem('storeMessages') || '{}')).length} categorías de mensajes</li>
-                <li>⚙️ Configuración de tienda sincronizada</li>
               </ul>
             </div>
             <button 
@@ -388,10 +475,10 @@ export const STORE_MESSAGES = ${JSON.stringify(messages, null, 2)};
               {isExporting ? (
                 <span className={styles.loading}>
                   <span className="loader-2"></span>
-                  Exportando backup sincronizado...
+                  Exportando backup...
                 </span>
               ) : (
-                '📤 Exportar Backup Completo Sincronizado'
+                '📤 Exportar Backup Completo'
               )}
             </button>
           </div>
@@ -410,13 +497,13 @@ export const STORE_MESSAGES = ${JSON.stringify(messages, null, 2)};
           <div className={styles.step}>
             <span className={styles.stepNumber}>2</span>
             <div className={styles.stepContent}>
-              <strong>Sincronización automática:</strong> Los cambios se sincronizan automáticamente en memoria y están listos para exportar.
+              <strong>Verificar cambios:</strong> Los cambios se aplican automáticamente en la tienda en tiempo real.
             </div>
           </div>
           <div className={styles.step}>
             <span className={styles.stepNumber}>3</span>
             <div className={styles.stepContent}>
-              <strong>Exportar backup:</strong> Haz clic en "Exportar Backup Completo Sincronizado" para generar los archivos actualizados.
+              <strong>Exportar backup:</strong> Haz clic en "Exportar Backup Completo" para generar los archivos actualizados.
             </div>
           </div>
           <div className={styles.step}>

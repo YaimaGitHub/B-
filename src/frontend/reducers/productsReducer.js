@@ -53,20 +53,6 @@ export const productsReducer = (state, action) => {
       };
     }
 
-    case PRODUCTS_ACTION.UPDATE_PRODUCTS_FROM_CONFIG: {
-      return {
-        ...state,
-        products: [...action.payload.products],
-      };
-    }
-
-    case PRODUCTS_ACTION.UPDATE_CATEGORIES_FROM_CONFIG: {
-      return {
-        ...state,
-        categories: [...action.payload.categories],
-      };
-    }
-
     case PRODUCTS_ACTION.SHOW_LOADER: {
       return {
         ...state,
@@ -108,6 +94,21 @@ export const productsReducer = (state, action) => {
       return {
         ...state,
         wishlist: [...action.payload.wishlist],
+      };
+    }
+
+    // NUEVAS ACCIONES PARA SINCRONIZACIÓN DEL ADMIN
+    case PRODUCTS_ACTION.UPDATE_PRODUCTS_FROM_ADMIN: {
+      return {
+        ...state,
+        products: [...action.payload.products],
+      };
+    }
+
+    case PRODUCTS_ACTION.UPDATE_CATEGORIES_FROM_ADMIN: {
+      return {
+        ...state,
+        categories: [...action.payload.categories],
       };
     }
 
