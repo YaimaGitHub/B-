@@ -9,7 +9,7 @@ export const products = [
     "name": "HP Pavilion - Laptop antirreflejos con pantalla táctil HD",
     "price": 171900,
     "originalPrice": 191000,
-    "description": "HP Pavilion - Laptop antirreflejos con pantalla táctil HD. A10-9620P Quad Core, 16GB, 1TB, 15.6 pulgadas (Pantalla). Radeon R5 Windows 10 Laptop.\n\n,Marca: HP\n,Tamaño de pantalla: 15,6 Pulgadas\n,Tamaño del disco duro: 1 TB\n,Modelo de CPU: AMD A Series\n,Tamaño de la memoria RAM instalada:\t16GB\n,Sistema operativo: Windows 10\n,Coprocesador de gráficos: AMD Radeon R5",
+    "description": "HP Pavilion - Laptop antirreflejos con pantalla táctil HD. A10-9620P Quad Core, 16GB, 1TB, 15.6 pulgadas (Pantalla). Radeon R5 Windows 10 Laptop.\n\n-Marca: HP\n-Tamaño de pantalla: 15,6 Pulgadas\n-Tamaño del disco duro: 1 TB\n-Modelo de CPU: AMD A Series\n-Tamaño de la memoria RAM instalada:\t16GB\n-Sistema operativo: Windows 10\nCoprocesador de gráficos: AMD Radeon R5",
     "category": "portátiles",
     "company": "HP",
     "stock": 1,

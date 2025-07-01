@@ -63,8 +63,8 @@ export const SORT_TYPE = {
 export const RATINGS = [4, 3, 2, 1];
 
 export const TEST_USER = {
-  email: 'jethalal.gada@gmail.com',
-  password: 'babitaji1234',
+  email: 'yero.shop@gmail.com',
+  password: 'yero1234',
 };
 
 export const SUPER_ADMIN = {
@@ -155,7 +155,7 @@ export const STORE_WHATSAPP = '${finalStoreConfig.storeInfo?.whatsappNumber || '
 
 // Configuración por defecto de la tienda - ACTUALIZADA
 export const DEFAULT_STORE_CONFIG = ${JSON.stringify(finalStoreConfig.storeInfo || {
-  storeName: 'Gada Electronics',
+  storeName: 'Yero Shop!',
   whatsappNumber: '+53 54690878',
   storeAddress: 'Santiago de Cuba, Cuba',
   lastModified: new Date().toISOString(),

@@ -138,7 +138,7 @@ const CheckoutDetails = ({
       minute: '2-digit'
     })}\n\n`;
     
-    message += `🏪 *Gada Electronics*\n`;
+    message += `🏪 *Yero Shop!*\n`;
     message += `"Naam hi kaafi hai" ✨\n`;
     message += `¡Gracias por confiar en nosotros! 🙏`;
 

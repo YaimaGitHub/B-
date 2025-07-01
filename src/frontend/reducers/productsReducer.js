@@ -13,14 +13,14 @@ export const initialProductsState = {
   },
   addressList: [
     {
-      addressId: 'abc',
-      username: 'Swastik Patro',
-      mobile: 9203874811,
-      alternate: 9370818549,
-      city: 'kalyan',
-      state: 'Maharashtra',
+      addressId: 'Yero',
+      username: 'Yero Shop',
+      mobile: +5354690878,
+      alternate: +5354690878,
+      city: 'Cuba',
+      state: 'Santiago de Cuba',
       pincode: 421306,
-      addressInfo: '9133 Kessler Grove Apt. 325',
+      addressInfo: 'Calle 11 /32 y 40 Edif28 Apt. 4 y 6',
     },
   ],
 };
