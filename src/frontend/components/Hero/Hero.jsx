@@ -11,12 +11,10 @@ const Hero = () => {
     <section className='white-bcg'>
       <div className={`container ${styles.hero}`}>
         <article className={styles.content}>
-          <h1>Experimenta la Electrónica Redefinida: Libera la Innovación</h1>
+          <h1>La tienda online de compras hecha a tu medida</h1>
 
           <p>
-            Descubre el Futuro de la Electrónica: Libera la Innovación, Sumérgete en 
-            Calidad Sin Igual. Experimenta nuestra tecnología de vanguardia y 
-            eleva tu día a día con Gada Electronics. Explora lo extraordinario hoy.
+            ¡Bienvenido a Yero Shop! Experimenta la alegría de las compras en línea sin problemas y explora el mundo de de una forma diferente con nosotros. Comienza a navegar por nuestra vasta colección hoy y eleva tu estilo de vida digital con nuestros productos y servicios excepcionales.
           </p>
 
           <Link to='/products' className={`btn ${styles.btnHero}`}>

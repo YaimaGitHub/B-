@@ -7,7 +7,7 @@ import styles from './StoreSettings.module.css';
 const StoreSettings = () => {
   const { storeConfig, updateStoreInfo, updateZones } = useConfigContext();
   const [storeSettings, setStoreSettings] = useState({
-    storeName: 'Gada Electronics',
+    storeName: 'Yero Shop!',
     whatsappNumber: '+53 54690878',
     storeAddressId: 'store-main-address',
   });
