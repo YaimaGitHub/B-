@@ -10,7 +10,7 @@ export const products = [
     "price": 171900,
     "originalPrice": 189000,
     "description": "HP Pavilion - Laptop antirreflejos con pantalla táctil HD, A10-9620P Quad Core 8GB, Tamaño del disco duro:  1TB              Tamaño de pantalla: 15.6 pulgadas Coprocesador de gráficos: Radeon R5 Sistema operativo: Windows 10 Laptop",
-    "category": "laptop",
+    "category": "portátiles",
     "company": "HP",
     "stock": 1,
     "reviewCount": 418,
