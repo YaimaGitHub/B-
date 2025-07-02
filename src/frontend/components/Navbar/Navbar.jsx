@@ -20,7 +20,7 @@ const Navbar = () => {
           <h3 className={styles.logo}>
             Yero{' '}
             <span className={styles.logoTheme}>
-              Shop{!isNavInLoginOrSignupPage ? '!' : ''}
+              Shop{!isNavInLoginOrSignupPage ? '!' : '!'}
             </span>
           </h3>
         </Link>

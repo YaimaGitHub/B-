@@ -21,7 +21,7 @@ const StoreSettings = () => {
   useEffect(() => {
     if (storeConfig.storeInfo) {
       setStoreSettings({
-        storeName: storeConfig.storeInfo.storeName || 'Gada Electronics',
+        storeName: storeConfig.storeInfo.storeName || 'Yero Shop!',
         whatsappNumber: storeConfig.storeInfo.whatsappNumber || '+53 54690878',
         storeAddressId: storeConfig.storeInfo.storeAddressId || 'store-main-address',
       });

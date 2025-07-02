@@ -11,10 +11,12 @@ const Hero = () => {
     <section className='white-bcg'>
       <div className={`container ${styles.hero}`}>
         <article className={styles.content}>
-          <h1>La tienda online de compras hecha a tu medida</h1>
+          <h1>Experimenta la Electrónica Redefinida: Libera la Innovación</h1>
 
           <p>
-            ¡Bienvenido a Yero Shop! Experimenta la alegría de las compras en línea sin problemas y explora el mundo de de una forma diferente con nosotros. Comienza a navegar por nuestra vasta colección hoy y eleva tu estilo de vida digital con nuestros productos y servicios excepcionales.
+            Descubre el Futuro de la Electrónica: Libera la Innovación, Sumérgete en 
+            Calidad Sin Igual. Experimenta nuestra tecnología de vanguardia y 
+            eleva tu día a día con Yero Shop. Explora lo extraordinario hoy.
           </p>
 
           <Link to='/products' className={`btn ${styles.btnHero}`}>
@@ -26,7 +28,7 @@ const Hero = () => {
           <article className={styles.imageContainer}>
             <img
               src={jethalalBanner}
-              alt='jethalal'
+              alt="jethalal"
               className={styles.banner}
             />
           </article>
