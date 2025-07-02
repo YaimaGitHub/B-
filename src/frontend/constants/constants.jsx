@@ -54,6 +54,7 @@ export const LOCAL_STORAGE_KEYS = {
   User: 'user',
   Token: 'token',
   StoreConfig: 'storeConfig',
+  Currency: 'selectedCurrency',
 };
 
 export const LOGIN_CLICK_TYPE = {
@@ -108,6 +109,40 @@ export const SERVICE_TYPES = {
   HOME_DELIVERY: 'home_delivery',
   PICKUP: 'pickup'
 };
+
+// SISTEMA DE MONEDAS Y CONVERSIÓN
+export const CURRENCIES = {
+  CUP: {
+    code: 'CUP',
+    name: 'Peso Cubano',
+    symbol: '$',
+    flag: '🇨🇺',
+    rate: 1, // Base currency
+  },
+  USD: {
+    code: 'USD',
+    name: 'Dólar Estadounidense',
+    symbol: '$',
+    flag: '🇺🇸',
+    rate: 385.00, // 1 USD = 385 CUP
+  },
+  EUR: {
+    code: 'EUR',
+    name: 'Euro',
+    symbol: '€',
+    flag: '🇪🇺',
+    rate: 425.00, // 1 EUR = 425 CUP
+  },
+  MLC: {
+    code: 'MLC',
+    name: 'Moneda Libremente Convertible',
+    symbol: 'MLC',
+    flag: '🏦',
+    rate: 250.00, // 1 MLC = 250 CUP
+  },
+};
+
+export const DEFAULT_CURRENCY = 'CUP';
 
 // Zonas de Santiago de Cuba con costos de entrega - ACTUALIZADAS
 export const SANTIAGO_ZONES = [
