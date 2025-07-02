@@ -222,7 +222,11 @@ const CheckoutDetails = ({
   return (
     <article className={styles.checkout}>
       <div className={styles.checkoutHeader}>
-        <h3 className='text-center'>💰 Detalles del Precio</h3>
+        <h3 className={styles.priceTitle}>
+          <span className={styles.titleIcon}>💰</span>
+          <span className={styles.titleText}>Detalles del Precio</span>
+          <div className={styles.titleUnderline}></div>
+        </h3>
       </div>
 
       <CouponSearch
