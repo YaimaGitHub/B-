@@ -1,4 +1,4 @@
-import { AiFillGithub, AiFillApi, AiOutlineTwitter } from 'react-icons/ai';
+import { AiFillGithub, AiFillLinkedin, AiOutlineTwitter, AiFillFacebook } from 'react-icons/ai';
 import { v4 as uuid } from 'uuid';
 
 export const FOOTER_LINKS = [
@@ -9,12 +9,12 @@ export const FOOTER_LINKS = [
   },
   {
     id: 2,
-    icon: <AiFillApi />,
+    icon: <AiFillLinkedin />,
     url: 'https://www.linkedin.com/in/swastik-patro-2a54bb19b/',
   },
   {
     id: 3,
-    icon: <AiFillFacebook />,
+    icon: <AiFillGithub />,
     url: 'https://github.com/swastikpatro',
   },
 ];
