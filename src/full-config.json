@@ -189,7 +189,7 @@
           }
         ],
         "image": "https://res.cloudinary.com/dtbd1y4en/image/upload/v1683908295/mi-notebook-pro_hi4vih.jpg",
-        "isShippingAvailable": false,
+        "isShippingAvailable": true,
         "featured": false,
         "id": "2"
       },
@@ -1611,7 +1611,7 @@
         "disabled": false
       }
     ],
-    "lastModified": "2025-07-03T10:41:08.855Z"
+    "lastModified": "2025-07-03T10:46:24.202Z"
   },
   "products": [
     {
@@ -1658,7 +1658,7 @@
         }
       ],
       "image": "https://res.cloudinary.com/dtbd1y4en/image/upload/v1683908295/mi-notebook-pro_hi4vih.jpg",
-      "isShippingAvailable": false,
+      "isShippingAvailable": true,
       "featured": false,
       "id": "2"
     },
@@ -3081,7 +3081,7 @@
     }
   ],
   "messages": {},
-  "exportDate": "2025-07-03T10:41:25.353Z",
+  "exportDate": "2025-07-03T10:46:51.689Z",
   "version": "2.0.0",
   "storeInfo": {
     "storeName": "Gada Electronics",
@@ -3227,5 +3227,5 @@
       "cost": 400
     }
   ],
-  "lastModified": "2025-07-03T10:41:08.855Z"
+  "lastModified": "2025-07-03T10:46:24.203Z"
 }

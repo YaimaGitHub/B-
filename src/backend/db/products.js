@@ -48,7 +48,7 @@ export const products = [
       }
     ],
     "image": "https://res.cloudinary.com/dtbd1y4en/image/upload/v1683908295/mi-notebook-pro_hi4vih.jpg",
-    "isShippingAvailable": false,
+    "isShippingAvailable": true,
     "featured": false,
     "id": "2"
   },
