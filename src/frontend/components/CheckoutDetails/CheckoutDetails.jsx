@@ -102,7 +102,7 @@ const CheckoutDetails = ({
       message += `💰 *Costo de entrega:* ${formatPrice(deliveryCost)}\n`;
     } else {
       message += `📦 *Modalidad:* Recoger en tienda\n`;
-      message += `🏪 *Ubicación:* Gada Electronics - Santiago de Cuba\n`;
+      message += `🏪 *Ubicación:* Yero Shop! - Santiago de Cuba\n`;
       if (selectedAddress.additionalInfo) {
         message += `📝 *Información adicional:* ${selectedAddress.additionalInfo}\n`;
       }
@@ -161,11 +161,11 @@ const CheckoutDetails = ({
     message += `• Coordine horario de entrega/recogida\n`;
     message += `• Mantenga este número de pedido para referencia\n\n`;
     
-    message += `🏪 *GADA ELECTRONICS*\n`;
-    message += `"Naam hi kaafi hai" ✨\n`;
+    message += `🏪 *Yero Shop!*\n`;
+    message += `"La tienda online de compras hecha a tu medida" ✨\n`;
     message += `📍 Santiago de Cuba, Cuba\n`;
     message += `📱 WhatsApp: ${STORE_WHATSAPP}\n`;
-    message += `🌐 Tienda online: gada-electronics.com\n\n`;
+    message += `🌐 Tienda online: https://yeroshop.vercel.app\n\n`;
     message += `¡Gracias por confiar en nosotros! 🙏\n`;
     message += `Su satisfacción es nuestra prioridad 💯`;
 
