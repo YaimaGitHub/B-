@@ -114,8 +114,8 @@ export const SERVICE_TYPES = {
 export const SANTIAGO_ZONES = [
   {
     "id": "centro",
-    "name": "Centro Histórico",
-    "cost": 50
+    "name": "Nuevo Vista Alegre",
+    "cost": 100
   },
   {
     "id": "vista_alegre",
@@ -125,42 +125,27 @@ export const SANTIAGO_ZONES = [
   {
     "id": "sueno",
     "name": "Sueño",
-    "cost": 60
+    "cost": 300
   },
   {
     "id": "san_pedrito",
     "name": "San Pedrito",
-    "cost": 80
+    "cost": 250
   },
   {
     "id": "altamira",
     "name": "Altamira",
-    "cost": 70
+    "cost": 500
   },
   {
     "id": "reparto_flores",
     "name": "Reparto Flores",
-    "cost": 65
-  },
-  {
-    "id": "chicharrones",
-    "name": "Chicharrones",
-    "cost": 85
-  },
-  {
-    "id": "los_olmos",
-    "name": "Los Olmos",
-    "cost": 90
-  },
-  {
-    "id": "santa_barbara",
-    "name": "Santa Bárbara",
-    "cost": 95
+    "cost": 350
   },
   {
     "id": "micro_9",
-    "name": "Micro 9",
-    "cost": 100
+    "name": "Micro 7, 8 , 9",
+    "cost": 300
   },
   {
     "id": "micro_4",
@@ -170,22 +155,67 @@ export const SANTIAGO_ZONES = [
   {
     "id": "alameda",
     "name": "Alameda",
-    "cost": 55
+    "cost": 300
   },
   {
     "id": "puerto",
-    "name": "Puerto",
-    "cost": 45
+    "name": "El Caney",
+    "cost": 800
   },
   {
     "id": "siboney",
-    "name": "Siboney",
-    "cost": 120
+    "name": "Quintero",
+    "cost": 500
   },
   {
     "id": "ciudamar",
-    "name": "Ciudamar",
-    "cost": 110
+    "name": "Distrito José Martí",
+    "cost": 500
+  },
+  {
+    "id": "marimon",
+    "name": "Marimon",
+    "cost": 300
+  },
+  {
+    "id": "los_cangrejitos",
+    "name": "Los cangrejitos",
+    "cost": 350
+  },
+  {
+    "id": "trocha",
+    "name": "Trocha",
+    "cost": 350
+  },
+  {
+    "id": "versalles",
+    "name": "Versalles",
+    "cost": 800
+  },
+  {
+    "id": "portuondo",
+    "name": "Portuondo",
+    "cost": 500
+  },
+  {
+    "id": "30_de_noviembre",
+    "name": "30 de Noviembre",
+    "cost": 500
+  },
+  {
+    "id": "rajayoga",
+    "name": "Rajayoga",
+    "cost": 600
+  },
+  {
+    "id": "antonio_maceo",
+    "name": "Antonio Maceo",
+    "cost": 500
+  },
+  {
+    "id": "los_pinos",
+    "name": "Los Pinos",
+    "cost": 400
   }
 ];
 
@@ -237,7 +267,7 @@ export const DEFAULT_STORE_CONFIG = {
   "storeName": "Gada Electronics",
   "whatsappNumber": "+53 54690878",
   "storeAddress": "Santiago de Cuba, Cuba",
-  "lastModified": "2025-07-03T10:27:59.315Z",
+  "lastModified": "2025-07-03T10:41:25.313Z",
   "version": "1.0.0"
 };
 
