@@ -63,8 +63,8 @@ export const SORT_TYPE = {
 export const RATINGS = [4, 3, 2, 1];
 
 export const TEST_USER = {
-  email: 'jethalal.gada@gmail.com',
-  password: 'babitaji1234',
+  email: 'yero.shop@gmail.com',
+  password: 'yeroi1234',
 };
 
 export const SUPER_ADMIN = {
