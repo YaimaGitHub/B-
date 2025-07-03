@@ -10,7 +10,7 @@ export const products = [
     "price": 171900,
     "originalPrice": 189000,
     "description": "For this model, screen size is 39.62 cm and hard disk size is 256 GB. CPU Model\tCore is i3. RAM Memory Installed Size is 8 GB. Operating System is Windows 10 Home. Special Feature includes Anti Glare Screen, Light Weight, Thin. Graphics Card is Integrated",
-    "category": "laptop",
+    "category": "portátiles",
     "company": "HP",
     "stock": 1,
     "reviewCount": 418,
@@ -29,9 +29,14 @@ export const products = [
   {
     "_id": "eb7db2dd-231a-47f5-b803-4415c2150efa",
     "name": "mi notebook pro",
-    "price": 54499,
-    "originalPrice": 74999,
-    "image": "https://res.cloudinary.com/dtbd1y4en/image/upload/v1683908295/mi-notebook-pro_hi4vih.jpg",
+    "price": 100,
+    "originalPrice": 500,
+    "description": "For this model, screen size is 14 Inches and hard disk size is 512 GB. CPU Model Core is i5. RAM Memory Installed Size is 16 GB. Operating System is Windows 11. Special Feature includes Fingerprint Reader, Backlit Keyboard. Graphics Card is Integrated",
+    "category": "portátiles",
+    "company": "redmi",
+    "stock": 10,
+    "reviewCount": 1805,
+    "stars": 4.3,
     "colors": [
       {
         "color": "#00ff00",
@@ -42,13 +47,9 @@ export const products = [
         "colorQuantity": 2
       }
     ],
-    "company": "redmi",
-    "description": "For this model, screen size is 14 Inches and hard disk size is 512 GB. CPU Model Core is i5. RAM Memory Installed Size is 16 GB. Operating System is Windows 11. Special Feature includes Fingerprint Reader, Backlit Keyboard. Graphics Card is Integrated",
-    "category": "laptop",
+    "image": "https://res.cloudinary.com/dtbd1y4en/image/upload/v1683908295/mi-notebook-pro_hi4vih.jpg",
     "isShippingAvailable": false,
-    "stock": 10,
-    "reviewCount": 1805,
-    "stars": 4.3,
+    "featured": false,
     "id": "2"
   },
   {
@@ -56,7 +57,12 @@ export const products = [
     "name": "mi 5A",
     "price": 13499,
     "originalPrice": 24999,
-    "image": "https://res.cloudinary.com/dtbd1y4en/image/upload/v1683908781/mi-5a_spazxt.jpg",
+    "description": "For this model, screen size is 32 Inches. Product Dimensions\tis (19D x 71.5W x 47H) cm. Operating System is Windows 11. Mounting Hardware includes\t1 LED TV, 2 Table Stand Base, 1 User Manual, 1 Remote Control, 4 screws, 2 x AAA Batteries. Resolution is 720p with the refresh rate is 60Hz. Tapu streams NETFLIX using this device 🧡",
+    "category": "farmacia",
+    "company": "redmi",
+    "stock": 27,
+    "reviewCount": 35573,
+    "stars": 4.2,
     "colors": [
       {
         "color": "#0000ff",
@@ -75,13 +81,9 @@ export const products = [
         "colorQuantity": 9
       }
     ],
-    "company": "redmi",
-    "description": "For this model, screen size is 32 Inches. Product Dimensions\tis (19D x 71.5W x 47H) cm. Operating System is Windows 11. Mounting Hardware includes\t1 LED TV, 2 Table Stand Base, 1 User Manual, 1 Remote Control, 4 screws, 2 x AAA Batteries. Resolution is 720p with the refresh rate is 60Hz. Tapu streams NETFLIX using this device 🧡",
-    "category": "tv",
+    "image": "https://res.cloudinary.com/dtbd1y4en/image/upload/v1683908781/mi-5a_spazxt.jpg",
     "isShippingAvailable": true,
-    "stock": 27,
-    "reviewCount": 35573,
-    "stars": 4.2,
+    "featured": false,
     "id": "3"
   },
   {
@@ -110,7 +112,12 @@ export const products = [
     "name": "mi sonicBass",
     "price": 1299,
     "originalPrice": 1599,
-    "image": "https://res.cloudinary.com/dtbd1y4en/image/upload/v1683909289/mi-sonicBass_zgkhiw.jpg",
+    "description": "This is a \"In Ear\" product and wireless and equipped with 9.2 mm dynamic drivers. Features include Dual-Mic Noise Cancellation, Dual Pairing Multi-Point Connection with Flexi Arc and Skin-friendly Design. This product is Atamaram Bhide's 🧡 and is in under common man budget.",
+    "category": "moda y belleza",
+    "company": "redmi",
+    "stock": 15,
+    "reviewCount": 8238,
+    "stars": 2.5,
     "colors": [
       {
         "color": "#0000ff",
@@ -125,13 +132,9 @@ export const products = [
         "colorQuantity": 3
       }
     ],
-    "company": "redmi",
-    "description": "This is a \"In Ear\" product and wireless and equipped with 9.2 mm dynamic drivers. Features include Dual-Mic Noise Cancellation, Dual Pairing Multi-Point Connection with Flexi Arc and Skin-friendly Design. This product is Atamaram Bhide's 🧡 and is in under common man budget.",
-    "category": "earphone",
+    "image": "https://res.cloudinary.com/dtbd1y4en/image/upload/v1683909289/mi-sonicBass_zgkhiw.jpg",
     "isShippingAvailable": true,
-    "stock": 15,
-    "reviewCount": 8238,
-    "stars": 2.5,
+    "featured": false,
     "id": "5"
   },
   {

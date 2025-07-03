@@ -54,7 +54,7 @@ export const LOCAL_STORAGE_KEYS = {
   User: 'user',
   Token: 'token',
   StoreConfig: 'storeConfig',
-  Currency: 'selectedCurrency', // AGREGADO: Clave para la moneda seleccionada
+  Currency: 'selectedCurrency',
 };
 
 export const LOGIN_CLICK_TYPE = {
@@ -237,7 +237,7 @@ export const DEFAULT_STORE_CONFIG = {
   "storeName": "Gada Electronics",
   "whatsappNumber": "+53 54690878",
   "storeAddress": "Santiago de Cuba, Cuba",
-  "lastModified": "2025-07-03T08:55:48.865Z",
+  "lastModified": "2025-07-03T09:41:32.754Z",
   "version": "1.0.0"
 };
 
@@ -283,35 +283,35 @@ export const PRODUCT_CATEGORY_ICONS = {
   'default': '📦'
 };
 
-// CONSTANTES DE MONEDA AGREGADAS
+// CONSTANTES DE MONEDA
 export const CURRENCIES = {
   CUP: {
     code: 'CUP',
     name: 'Peso Cubano',
     symbol: '$',
     flag: '🇨🇺',
-    rate: 1, // Moneda base
+    rate: 1,
   },
   USD: {
     code: 'USD',
     name: 'Dólar Estadounidense',
     symbol: '$',
     flag: '🇺🇸',
-    rate: 320, // 1 USD = 320 CUP (mercado informal cubano)
+    rate: 320,
   },
   EUR: {
     code: 'EUR',
     name: 'Euro',
     symbol: '€',
     flag: '🇪🇺',
-    rate: 340, // 1 EUR = 340 CUP (mercado informal cubano)
+    rate: 340,
   },
   MLC: {
     code: 'MLC',
     name: 'Moneda Libremente Convertible',
     symbol: 'MLC',
     flag: '🏦',
-    rate: 270, // 1 MLC = 270 CUP (tasa oficial cubana)
+    rate: 270,
   },
 };
 
