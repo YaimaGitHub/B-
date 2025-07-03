@@ -1,9 +1,11 @@
 import { SERVICE_TYPES, ToastType, COUNTRY_CODES } from '../../constants/constants';
 import { useConfigContext } from '../../contexts/ConfigContextProvider';
+import { useCurrencyContext } from '../../contexts/CurrencyContextProvider';
 import { useAllProductsContext } from '../../contexts/ProductsContextProvider';
 import { useState } from 'react';
 import { v4 as uuid } from 'uuid';
 import FormRow from '../FormRow';
+import Price from '../Price';
 import styles from './AddressForm.module.css';
 import {
   toastHandler,
@@ -15,6 +17,7 @@ const AddressForm = ({ isAdding, isEditingAndData = null, closeForm }) => {
     useAllProductsContext();
 
   const { storeConfig } = useConfigContext();
+  const { formatPrice } = useCurrencyContext();
   const SANTIAGO_ZONES = storeConfig.zones || [];
 
   const isEditing = !!isEditingAndData;
@@ -316,7 +319,7 @@ const AddressForm = ({ isAdding, isEditingAndData = null, closeForm }) => {
                   </option>
                   {SANTIAGO_ZONES.map((zone) => (
                     <option key={zone.id} value={zone.id}>
-                      {zone.name} - ${zone.cost} CUP
+                      {zone.name} - <Price amount={zone.cost} />
                     </option>
                   ))}
                 </select>

@@ -22,7 +22,7 @@ const Footer = () => {
         <span>© {presentYear} </span>
         <div className={styles.jethaDiv}>
           <button onClick={handleSoundPausePlay} className={styles.nameBtn}>
-            Yero Shop!.
+            Jethalal Gada.
           </button>{' '}
           <div className={styles.tooltip}>⚠ Includes Music !!</div>
         </div>

@@ -1,5 +1,5 @@
 <div align="center">
-  <img src="" height="300" width="300" alt="logo"/>
+  <img src="https://res.cloudinary.com/dtbd1y4en/image/upload/v1686085866/jethalalBanner_mwo4ml.png" height="300" width="300" alt="logo"/>
 
 # The Gada Electronics
 
