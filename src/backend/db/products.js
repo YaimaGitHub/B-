@@ -6,10 +6,10 @@
 export const products = [
   {
     "_id": "9eb0c25b-447c-4723-9ce4-639527debb68",
-    "name": "mi book 156",
+    "name": "HP Pavilion - Laptop antirreflejos con pantalla táctil HD",
     "price": 171900,
     "originalPrice": 189000,
-    "description": "For this model, screen size is 39.62 cm and hard disk size is 256 GB. CPU Model\tCore is i3. RAM Memory Installed Size is 8 GB. Operating System is Windows 10 Home. Special Feature includes Anti Glare Screen, Light Weight, Thin. Graphics Card is Integrated",
+    "description": "HP Pavilion - Laptop antirreflejos con pantalla táctil HD A10-9620P Quad Core, Tamaño de la memoria RAM instalada: 8GB, Tamaño del disco duro: 1TB, Tamaño de pantalla: 15.6 pulgadas, Coprocesador de gráficos: Radeon R5, Sistema operativo: Windows 10",
     "category": "portátiles",
     "company": "HP",
     "stock": 1,

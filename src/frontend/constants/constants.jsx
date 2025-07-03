@@ -192,31 +192,31 @@ export const SANTIAGO_ZONES = [
 // Cupones de descuento - ACTUALIZADOS
 export const COUPONS = [
   {
-    "couponCode": "PEPEP",
+    "couponCode": "100% AHORRO",
     "text": "100% Descuento",
     "discountPercent": 55,
-    "minCartPriceRequired": 150000,
+    "minCartPriceRequired": 300000,
     "id": "b6c7a585-79a2-4fde-93cd-80422ef3acfa"
   },
   {
-    "couponCode": "PEPE 2",
+    "couponCode": "20% REGALO",
     "text": "20% Descuento",
     "discountPercent": 20,
-    "minCartPriceRequired": 100000,
+    "minCartPriceRequired": 200000,
     "id": "ecdff7ad-f653-467f-9257-7fcd0fdea3a8"
   },
   {
-    "couponCode": "PEPE 3",
+    "couponCode": "10% PROMO",
     "text": "10% Descuento",
     "discountPercent": 10,
-    "minCartPriceRequired": 50000,
+    "minCartPriceRequired": 100000,
     "id": "4898bd1c-7227-47b0-b6fe-32159f71072b"
   },
   {
-    "couponCode": "PEPE 4",
+    "couponCode": "5% MENOS",
     "text": "5% Descuento",
     "discountPercent": 5,
-    "minCartPriceRequired": 20000,
+    "minCartPriceRequired": 50000,
     "id": "12ee6cb8-1d2d-463d-b9f7-78bcd415c2e4"
   }
 ];
@@ -237,7 +237,7 @@ export const DEFAULT_STORE_CONFIG = {
   "storeName": "Gada Electronics",
   "whatsappNumber": "+53 54690878",
   "storeAddress": "Santiago de Cuba, Cuba",
-  "lastModified": "2025-07-03T09:41:32.754Z",
+  "lastModified": "2025-07-03T10:27:59.315Z",
   "version": "1.0.0"
 };
 
