@@ -120,7 +120,7 @@ export const SANTIAGO_ZONES = [
   {
     "id": "vista_alegre",
     "name": "Vista Alegre",
-    "cost": 75
+    "cost": 500
   },
   {
     "id": "sueno",
@@ -138,29 +138,19 @@ export const SANTIAGO_ZONES = [
     "cost": 500
   },
   {
-    "id": "reparto_flores",
-    "name": "Reparto Flores",
-    "cost": 350
-  },
-  {
     "id": "micro_9",
     "name": "Micro 7, 8 , 9",
     "cost": 300
   },
   {
-    "id": "micro_4",
-    "name": "Micro 4",
-    "cost": 100
-  },
-  {
     "id": "alameda",
     "name": "Alameda",
-    "cost": 300
+    "cost": 250
   },
   {
     "id": "puerto",
     "name": "El Caney",
-    "cost": 800
+    "cost": 1000
   },
   {
     "id": "siboney",
@@ -170,12 +160,12 @@ export const SANTIAGO_ZONES = [
   {
     "id": "ciudamar",
     "name": "Distrito José Martí",
-    "cost": 500
+    "cost": 200
   },
   {
     "id": "marimon",
     "name": "Marimon",
-    "cost": 300
+    "cost": 150
   },
   {
     "id": "los_cangrejitos",
@@ -190,32 +180,32 @@ export const SANTIAGO_ZONES = [
   {
     "id": "versalles",
     "name": "Versalles",
-    "cost": 800
+    "cost": 1000
   },
   {
     "id": "portuondo",
     "name": "Portuondo",
-    "cost": 500
+    "cost": 600
   },
   {
     "id": "30_de_noviembre",
     "name": "30 de Noviembre",
-    "cost": 500
+    "cost": 600
   },
   {
     "id": "rajayoga",
     "name": "Rajayoga",
-    "cost": 600
+    "cost": 800
   },
   {
     "id": "antonio_maceo",
     "name": "Antonio Maceo",
-    "cost": 500
+    "cost": 600
   },
   {
     "id": "los_pinos",
     "name": "Los Pinos",
-    "cost": 400
+    "cost": 300
   }
 ];
 
@@ -264,10 +254,10 @@ export const STORE_WHATSAPP = '+53 54690878';
 
 // Configuración por defecto de la tienda - ACTUALIZADA
 export const DEFAULT_STORE_CONFIG = {
-  "storeName": "Gada Electronics",
+  "storeName": "Yero Shop!",
   "whatsappNumber": "+53 54690878",
   "storeAddress": "Santiago de Cuba, Cuba",
-  "lastModified": "2025-07-04T15:59:21.305Z",
+  "lastModified": "2025-07-04T18:00:45.832Z",
   "version": "1.0.0"
 };
 

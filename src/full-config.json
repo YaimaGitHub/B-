@@ -1,11 +1,9 @@
 {
   "storeConfig": {
     "storeInfo": {
-      "storeName": "Gada Electronics",
+      "storeName": "Yero Shop!",
       "whatsappNumber": "+53 54690878",
-      "storeAddress": "Santiago de Cuba, Cuba",
-      "lastModified": "2025-07-04T06:02:08.139Z",
-      "version": "1.0.0"
+      "storeAddressId": "store-main-address"
     },
     "coupons": [
       {
@@ -46,7 +44,7 @@
       {
         "id": "vista_alegre",
         "name": "Vista Alegre",
-        "cost": 75
+        "cost": 500
       },
       {
         "id": "sueno",
@@ -64,29 +62,19 @@
         "cost": 500
       },
       {
-        "id": "reparto_flores",
-        "name": "Reparto Flores",
-        "cost": 350
-      },
-      {
         "id": "micro_9",
         "name": "Micro 7, 8 , 9",
         "cost": 300
       },
       {
-        "id": "micro_4",
-        "name": "Micro 4",
-        "cost": 100
-      },
-      {
         "id": "alameda",
         "name": "Alameda",
-        "cost": 300
+        "cost": 250
       },
       {
         "id": "puerto",
         "name": "El Caney",
-        "cost": 800
+        "cost": 1000
       },
       {
         "id": "siboney",
@@ -96,12 +84,12 @@
       {
         "id": "ciudamar",
         "name": "Distrito José Martí",
-        "cost": 500
+        "cost": 200
       },
       {
         "id": "marimon",
         "name": "Marimon",
-        "cost": 300
+        "cost": 150
       },
       {
         "id": "los_cangrejitos",
@@ -116,39 +104,39 @@
       {
         "id": "versalles",
         "name": "Versalles",
-        "cost": 800
+        "cost": 1000
       },
       {
         "id": "portuondo",
         "name": "Portuondo",
-        "cost": 500
+        "cost": 600
       },
       {
         "id": "30_de_noviembre",
         "name": "30 de Noviembre",
-        "cost": 500
+        "cost": 600
       },
       {
         "id": "rajayoga",
         "name": "Rajayoga",
-        "cost": 600
+        "cost": 800
       },
       {
         "id": "antonio_maceo",
         "name": "Antonio Maceo",
-        "cost": 500
+        "cost": 600
       },
       {
         "id": "los_pinos",
         "name": "Los Pinos",
-        "cost": 400
+        "cost": 300
       }
     ],
     "products": [
       {
         "_id": "9eb0c25b-447c-4723-9ce4-639527debb68",
         "name": "HP Pavilion",
-        "price": 172.8,
+        "price": 172800,
         "originalPrice": 192000,
         "description": "HP Pavilion - Laptop antirreflejos con pantalla táctil HD A10-9620P Quad Core, Tamaño de la memoria RAM instalada: 8GB, Tamaño del disco duro: 1TB, Tamaño de pantalla: 15.6 pulgadas, Coprocesador de gráficos: Radeon R5, Sistema operativo: Windows 10",
         "category": "portátiles",
@@ -298,13 +286,13 @@
         "disabled": false
       }
     ],
-    "lastModified": "2025-07-04T15:58:39.765Z"
+    "lastModified": "2025-07-04T18:00:31.042Z"
   },
   "products": [
     {
       "_id": "9eb0c25b-447c-4723-9ce4-639527debb68",
       "name": "HP Pavilion",
-      "price": 172.8,
+      "price": 172800,
       "originalPrice": 192000,
       "description": "HP Pavilion - Laptop antirreflejos con pantalla táctil HD A10-9620P Quad Core, Tamaño de la memoria RAM instalada: 8GB, Tamaño del disco duro: 1TB, Tamaño de pantalla: 15.6 pulgadas, Coprocesador de gráficos: Radeon R5, Sistema operativo: Windows 10",
       "category": "portátiles",
@@ -455,14 +443,12 @@
     }
   ],
   "messages": {},
-  "exportDate": "2025-07-04T15:59:21.656Z",
+  "exportDate": "2025-07-04T18:00:46.165Z",
   "version": "2.0.0",
   "storeInfo": {
-    "storeName": "Gada Electronics",
+    "storeName": "Yero Shop!",
     "whatsappNumber": "+53 54690878",
-    "storeAddress": "Santiago de Cuba, Cuba",
-    "lastModified": "2025-07-04T06:02:08.139Z",
-    "version": "1.0.0"
+    "storeAddressId": "store-main-address"
   },
   "coupons": [
     {
@@ -503,7 +489,7 @@
     {
       "id": "vista_alegre",
       "name": "Vista Alegre",
-      "cost": 75
+      "cost": 500
     },
     {
       "id": "sueno",
@@ -521,29 +507,19 @@
       "cost": 500
     },
     {
-      "id": "reparto_flores",
-      "name": "Reparto Flores",
-      "cost": 350
-    },
-    {
       "id": "micro_9",
       "name": "Micro 7, 8 , 9",
       "cost": 300
     },
     {
-      "id": "micro_4",
-      "name": "Micro 4",
-      "cost": 100
-    },
-    {
       "id": "alameda",
       "name": "Alameda",
-      "cost": 300
+      "cost": 250
     },
     {
       "id": "puerto",
       "name": "El Caney",
-      "cost": 800
+      "cost": 1000
     },
     {
       "id": "siboney",
@@ -553,12 +529,12 @@
     {
       "id": "ciudamar",
       "name": "Distrito José Martí",
-      "cost": 500
+      "cost": 200
     },
     {
       "id": "marimon",
       "name": "Marimon",
-      "cost": 300
+      "cost": 150
     },
     {
       "id": "los_cangrejitos",
@@ -573,33 +549,33 @@
     {
       "id": "versalles",
       "name": "Versalles",
-      "cost": 800
+      "cost": 1000
     },
     {
       "id": "portuondo",
       "name": "Portuondo",
-      "cost": 500
+      "cost": 600
     },
     {
       "id": "30_de_noviembre",
       "name": "30 de Noviembre",
-      "cost": 500
+      "cost": 600
     },
     {
       "id": "rajayoga",
       "name": "Rajayoga",
-      "cost": 600
+      "cost": 800
     },
     {
       "id": "antonio_maceo",
       "name": "Antonio Maceo",
-      "cost": 500
+      "cost": 600
     },
     {
       "id": "los_pinos",
       "name": "Los Pinos",
-      "cost": 400
+      "cost": 300
     }
   ],
-  "lastModified": "2025-07-04T15:58:39.765Z"
+  "lastModified": "2025-07-04T18:00:31.045Z"
 }
