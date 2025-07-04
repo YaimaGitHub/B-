@@ -179,7 +179,7 @@
         "isShippingAvailable": false,
         "featured": true,
         "id": "50",
-        "canUseCoupons": false
+        "canUseCoupons": true
       },
       {
         "_id": "2244a5d8-1cb5-4cb6-bad5-80e11651a148",
@@ -252,7 +252,7 @@
       }
     ],
     "categories": [],
-    "lastModified": "2025-07-04T20:12:53.102Z"
+    "lastModified": "2025-07-04T20:18:09.232Z"
   },
   "products": [
     {
@@ -299,7 +299,7 @@
       "isShippingAvailable": false,
       "featured": true,
       "id": "50",
-      "canUseCoupons": false
+      "canUseCoupons": true
     },
     {
       "_id": "2244a5d8-1cb5-4cb6-bad5-80e11651a148",
@@ -373,7 +373,7 @@
   ],
   "categories": [],
   "messages": {},
-  "exportDate": "2025-07-04T20:13:22.167Z",
+  "exportDate": "2025-07-04T20:18:31.593Z",
   "version": "2.0.0",
   "storeInfo": {
     "storeName": "Yero Shop!",
@@ -509,5 +509,5 @@
       "cost": 300
     }
   ],
-  "lastModified": "2025-07-04T20:12:53.104Z"
+  "lastModified": "2025-07-04T20:18:09.232Z"
 }
