@@ -172,10 +172,10 @@ const SingleProductPage = () => {
         </div>
 
         <div className={styles.price}>
-          <Price amount={price} showCurrencyCode={true} />
+          <Price amount={price} />
           {discountPercent > 0 && (
             <>
-              <Price amount={originalPrice} showCurrencyCode={true} />
+              <Price amount={originalPrice} />
               <span className={styles.discount}> ({discountPercent}% desc.)</span>
             </>
           )}

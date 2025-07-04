@@ -50,7 +50,7 @@ const CheckoutDetails = ({
     ? (selectedAddress?.deliveryCost || 0)
     : 0;
 
-  // CORREGIDO: Calcular descuento del cupón según la moneda seleccionada
+  // Calcular descuento del cupón según la moneda seleccionada
   const priceAfterCouponApplied = activeCoupon
     ? -Math.floor((totalAmountFromContext * activeCoupon.discountPercent) / 100)
     : 0;
@@ -64,10 +64,9 @@ const CheckoutDetails = ({
   const updateActiveCoupon = (couponObjClicked) => {
     setActiveCoupon(couponObjClicked);
     
-    // CORREGIDO: Notificación mejorada con información de descuento y moneda
+    // Notificación mejorada con información de descuento y moneda
     const currency = getCurrentCurrency();
     const discountAmount = Math.floor((totalAmountFromContext * couponObjClicked.discountPercent) / 100);
-    const discountInSelectedCurrency = convertFromCUP(discountAmount);
     
     toastHandler(
       ToastType.Success, 
@@ -121,7 +120,7 @@ const CheckoutDetails = ({
     
     message += `📞 *Teléfono de contacto:* ${selectedAddress.mobile}\n\n`;
     
-    // Productos con iconos y mejor formato - CORREGIDO CON CÓDIGO DE MONEDA
+    // Productos con iconos y mejor formato
     message += `🛍️ *PRODUCTOS SOLICITADOS*\n`;
     message += `═══════════════════════════════════════════════════════════════\n`;
     cartFromContext.forEach((item, index) => {
@@ -137,7 +136,7 @@ const CheckoutDetails = ({
       message += `   ─────────────────────────────────────────────────────────\n`;
     });
     
-    // Resumen financiero profesional - CORREGIDO CON CÓDIGO DE MONEDA
+    // Resumen financiero profesional
     message += `\n💳 *RESUMEN FINANCIERO*\n`;
     message += `═══════════════════════════════════════════════════════════════\n`;
     message += `🛍️ *Subtotal productos:* ${formatPriceWithCode(totalAmountFromContext)}\n`;
@@ -258,7 +257,7 @@ const CheckoutDetails = ({
           <span>
             🛍️ Precio ({totalCountFromContext} artículo{totalCountFromContext > 1 && 's'})
           </span>
-          <Price amount={totalAmountFromContext} showCurrencyCode={true} />
+          <Price amount={totalAmountFromContext} />
         </div>
 
         {activeCoupon && (
@@ -273,7 +272,7 @@ const CheckoutDetails = ({
                 🎫 Cupón {activeCoupon.couponCode} aplicado ({activeCoupon.discountPercent}%)
               </p>
             </div>
-            <Price amount={priceAfterCouponApplied} showCurrencyCode={true} />
+            <Price amount={priceAfterCouponApplied} />
           </div>
         )}
 
@@ -284,7 +283,7 @@ const CheckoutDetails = ({
               : '📦 Gastos de Envío'
             }
           </span>
-          <Price amount={deliveryCost} showCurrencyCode={true} />
+          <Price amount={deliveryCost} />
         </div>
       </div>
 
@@ -292,7 +291,7 @@ const CheckoutDetails = ({
 
       <div className={`${styles.row} ${styles.totalPrice}`}>
         <span>💰 Precio Total</span>
-        <Price amount={finalPriceToPay} showCurrencyCode={true} />
+        <Price amount={finalPriceToPay} />
       </div>
 
       <button 

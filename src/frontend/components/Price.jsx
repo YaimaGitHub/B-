@@ -1,7 +1,7 @@
 import { useCurrencyContext } from '../contexts/CurrencyContextProvider';
 
 /* eslint-disable react/prop-types */
-const Price = ({ amount, showCurrency = true, showCurrencyCode = false, className = '' }) => {
+const Price = ({ amount, showCurrency = true, showCurrencyCode = true, className = '' }) => {
   const { formatPrice, getCurrentCurrency } = useCurrencyContext();
   
   if (!amount && amount !== 0) {
@@ -11,11 +11,11 @@ const Price = ({ amount, showCurrency = true, showCurrencyCode = false, classNam
   const isAmountNegative = amount < 0;
   const amountOnUI = isAmountNegative ? -1 * amount : amount;
 
-  // Formatear precio con opción de mostrar código de moneda
+  // SIEMPRE mostrar el código de moneda por defecto
   const formattedPrice = formatPrice(amountOnUI, showCurrency);
   const currency = getCurrentCurrency();
 
-  // Si se solicita mostrar el código de moneda, agregarlo al final
+  // SIEMPRE agregar el código de moneda al final
   const finalPrice = showCurrencyCode 
     ? `${formattedPrice} ${currency.code}`
     : formattedPrice;

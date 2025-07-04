@@ -52,8 +52,8 @@ const CurrencyContextProvider = ({ children }) => {
     return amount * rate;
   };
 
-  // Función para formatear precio con la moneda seleccionada - MEJORADA
-  const formatPrice = (cupAmount, showCurrency = true, showCurrencyCode = false) => {
+  // Función para formatear precio SIEMPRE con código de moneda
+  const formatPrice = (cupAmount, showCurrency = true) => {
     const convertedAmount = convertFromCUP(cupAmount);
     const currency = CURRENCIES[selectedCurrency];
     
@@ -72,28 +72,23 @@ const CurrencyContextProvider = ({ children }) => {
     }
 
     if (!showCurrency) {
-      return formattedAmount;
+      return `${formattedAmount} ${currency.code}`;
     }
 
-    // Retornar con símbolo de moneda y opcionalmente código
+    // SIEMPRE retornar con símbolo y código de moneda
     let result;
     if (selectedCurrency === 'MLC') {
-      result = `${formattedAmount} ${currency.symbol}`;
+      result = `${formattedAmount} ${currency.symbol} ${currency.code}`;
     } else {
-      result = `${currency.symbol}${formattedAmount}`;
-    }
-
-    // Agregar código de moneda si se solicita
-    if (showCurrencyCode) {
-      result += ` ${currency.code}`;
+      result = `${currency.symbol}${formattedAmount} ${currency.code}`;
     }
 
     return result;
   };
 
-  // NUEVA: Función para formatear precio con código de moneda siempre visible
+  // Función para formatear precio con código de moneda (mantener compatibilidad)
   const formatPriceWithCode = (cupAmount) => {
-    return formatPrice(cupAmount, true, true);
+    return formatPrice(cupAmount, true);
   };
 
   // Función para obtener información de la moneda actual

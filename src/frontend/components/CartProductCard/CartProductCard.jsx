@@ -75,10 +75,10 @@ const CartProductCard = ({ singleCartItem }) => {
         <div className={styles.itemInfo}>
           <h3>{name}</h3>
           <div className={styles.cardMain}>
-            <Price amount={price} showCurrencyCode={true} />
+            <Price amount={price} />
             {discountPercent > 0 && (
               <>
-                <Price amount={originalPrice} showCurrencyCode={true} />
+                <Price amount={originalPrice} />
                 <span className={styles.discount}>
                   {' '}
                   ({discountPercent}% desc.)

@@ -155,7 +155,7 @@ const CouponSearch = ({ activeCoupon, updateActiveCoupon }) => {
                 {!isMobile && (
                   <span className={styles.tooltip}>
                     Compra por encima de{' '}
-                    <Price amount={singleCoupon.minCartPriceRequired} showCurrencyCode={true} /> para
+                    <Price amount={singleCoupon.minCartPriceRequired} /> para
                     aplicar
                   </span>
                 )}
