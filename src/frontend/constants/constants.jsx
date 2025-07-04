@@ -264,10 +264,10 @@ export const STORE_WHATSAPP = '+53 54690878';
 
 // Configuración por defecto de la tienda - ACTUALIZADA
 export const DEFAULT_STORE_CONFIG = {
-  "storeName": "Gada Electronics",
+  "storeName": "Yero Shop!",
   "whatsappNumber": "+53 54690878",
   "storeAddress": "Santiago de Cuba, Cuba",
-  "lastModified": "2025-07-03T17:13:30.569Z",
+  "lastModified": "2025-07-04T05:10:58.003Z",
   "version": "1.0.0"
 };
 
