@@ -60,7 +60,7 @@ const CartPage = () => {
                     ></span>
                     ({qty})
                   </span>
-                  <Price amount={price * qty} />
+                  <Price amount={price * qty} showCurrencyCode={true} />
                 </article>
               )
             )}
@@ -69,7 +69,7 @@ const CartPage = () => {
           <hr />
           <article className={`${styles.row} ${styles.totalPrice}`}>
             <span>Precio Total ({totalCount}):</span>
-            <Price amount={totalAmount} />
+            <Price amount={totalAmount} showCurrencyCode={true} />
           </article>
 
           <Link to='/checkout' className='btn text-center btn-width-100'>
