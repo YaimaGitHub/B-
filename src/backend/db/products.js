@@ -25,7 +25,7 @@ export const products = [
     "isShippingAvailable": true,
     "featured": true,
     "id": "1",
-    "canUseCoupons": true
+    "canUseCoupons": false
   },
   {
     "_id": "e7398eb2-4f87-4e5e-b949-83eb97960985",
@@ -48,7 +48,7 @@ export const products = [
     "isShippingAvailable": false,
     "featured": true,
     "id": "50",
-    "canUseCoupons": true
+    "canUseCoupons": false
   },
   {
     "_id": "2244a5d8-1cb5-4cb6-bad5-80e11651a148",
