@@ -257,7 +257,7 @@ export const DEFAULT_STORE_CONFIG = {
   "storeName": "Yero Shop!",
   "whatsappNumber": "+53 54690878",
   "storeAddress": "Santiago de Cuba, Cuba",
-  "lastModified": "2025-07-05T04:17:13.269Z",
+  "lastModified": "2025-07-05T03:46:50.315Z",
   "version": "1.0.0"
 };
 
@@ -317,21 +317,21 @@ export const CURRENCIES = {
     name: 'Dólar Estadounidense',
     symbol: '$',
     flag: '🇺🇸',
-    rate: 320,
+    rate: 384,
   },
   EUR: {
     code: 'EUR',
     name: 'Euro',
     symbol: '€',
     flag: '🇪🇺',
-    rate: 340,
+    rate: 425,
   },
   MLC: {
     code: 'MLC',
     name: 'Moneda Libremente Convertible',
     symbol: 'MLC',
     flag: '🏦',
-    rate: 270,
+    rate: 250,
   },
 };
 
