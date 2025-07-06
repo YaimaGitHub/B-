@@ -18,11 +18,7 @@ const SharedProfileLayout = () => {
       <main>
         <header>
           <Link className={showActiveCSS(isProfileActive)} to='/profile'>
-            <span className={styles.iconContainer}>
-              <span className={styles.modernIcon}>👤</span>
-              <span className={styles.iconGlow}></span>
-            </span>
-            <span className={styles.linkText}>Perfil</span>
+            👤 Perfil
           </Link>
 
           {!isAdmin && (
@@ -30,11 +26,7 @@ const SharedProfileLayout = () => {
               className={showActiveCSS(isAddressActive)}
               to='/profile/address'
             >
-              <span className={styles.iconContainer}>
-                <span className={styles.modernIcon}>📍</span>
-                <span className={styles.iconGlow}></span>
-              </span>
-              <span className={styles.linkText}>Direcciones</span>
+              📍 Direcciones
             </Link>
           )}
 
@@ -42,11 +34,7 @@ const SharedProfileLayout = () => {
             className={showActiveCSS(isCurrencyActive)}
             to='/profile/currency'
           >
-            <span className={styles.iconContainer}>
-              <span className={styles.modernIcon}>💱</span>
-              <span className={styles.iconGlow}></span>
-            </span>
-            <span className={styles.linkText}>Monedas</span>
+            💱 Monedas
           </Link>
 
           {isAdmin && (
@@ -54,11 +42,7 @@ const SharedProfileLayout = () => {
               className={showActiveCSS(isAdminPanelActive)}
               to='/profile/admin'
             >
-              <span className={styles.iconContainer}>
-                <span className={styles.modernIcon}>👑</span>
-                <span className={styles.iconGlow}></span>
-              </span>
-              <span className={styles.linkText}>Panel de Control</span>
+              👑 Panel de Control
             </Link>
           )}
         </header>

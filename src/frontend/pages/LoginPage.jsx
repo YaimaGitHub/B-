@@ -18,7 +18,6 @@ import { setIntoLocalStorage, toastHandler } from '../utils/utils';
 
 import { useAuthContext } from '../contexts/AuthContextProvider';
 import { useNavigateIfRegistered } from '../hooks';
-import styles from './LoginPage.module.css';
 
 const LoginPage = () => {
   const { updateUserAuth, user } = useAuthContext();
@@ -153,39 +152,27 @@ const LoginPage = () => {
 
         <button
           disabled={!!activeBtnLoader}
-          className={`btn btn-block ${styles.modernButton}`}
+          className='btn btn-block'
           type='submit'
         >
           {activeBtnLoader === LOGIN_CLICK_TYPE.RegisterClick ? (
-            <span className={styles.modernLoader}>
-              <span className={styles.loaderSpinner}></span>
-              <span>Iniciando sesión...</span>
-            </span>
+            <span className='loader-2'></span>
           ) : (
-            <span className={styles.buttonContent}>
-              <span className={styles.buttonIcon}>🔐</span>
-              <span>Iniciar Sesión</span>
-            </span>
+            'Iniciar Sesión'
           )}
         </button>
 
         {/* Guest Login button */}
         <button
           disabled={!!activeBtnLoader}
-          className={`btn btn-block ${styles.guestButton}`}
+          className='btn btn-block'
           type='button'
           onClick={(e) => handleSubmit(e, LOGIN_CLICK_TYPE.GuestClick)}
         >
           {activeBtnLoader === LOGIN_CLICK_TYPE.GuestClick ? (
-            <span className={styles.modernLoader}>
-              <span className={styles.loaderSpinner}></span>
-              <span>Accediendo como invitado...</span>
-            </span>
+            <span className='loader-2'></span>
           ) : (
-            <span className={styles.buttonContent}>
-              <span className={styles.buttonIcon}>👤</span>
-              <span>Iniciar como Invitado</span>
-            </span>
+            'Iniciar como Invitado'
           )}
         </button>
 
@@ -193,33 +180,23 @@ const LoginPage = () => {
         {!showAdminFields ? (
           <button
             disabled={!!activeBtnLoader}
-            className={`btn btn-block ${styles.adminButton}`}
+            className='btn btn-block btn-danger'
             type='button'
             onClick={handleAdminAccess}
           >
-            <span className={styles.buttonContent}>
-              <span className={styles.buttonIcon}>👑</span>
-              <span>Acceso Administrador</span>
-              <span className={styles.adminGlow}></span>
-            </span>
+            👑 Acceso Administrador
           </button>
         ) : (
           <button
             disabled={!!activeBtnLoader}
-            className={`btn btn-block ${styles.adminLoginButton}`}
+            className='btn btn-block btn-danger'
             type='button'
             onClick={(e) => handleSubmit(e, LOGIN_CLICK_TYPE.AdminClick)}
           >
             {activeBtnLoader === LOGIN_CLICK_TYPE.AdminClick ? (
-              <span className={styles.modernLoader}>
-                <span className={styles.loaderSpinner}></span>
-                <span>Verificando credenciales...</span>
-              </span>
+              <span className='loader-2'></span>
             ) : (
-              <span className={styles.buttonContent}>
-                <span className={styles.buttonIcon}>🔐</span>
-                <span>Iniciar Sesión como Administrador</span>
-              </span>
+              '🔐 Iniciar Sesión como Administrador'
             )}
           </button>
         )}
@@ -231,7 +208,6 @@ const LoginPage = () => {
           <Link
             to='/signup'
             state={{ from: locationOfLogin?.state?.from ?? '/' }}
-            className={styles.modernLink}
           >
             regístrate aquí
           </Link>

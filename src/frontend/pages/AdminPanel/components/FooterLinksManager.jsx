@@ -19,55 +19,18 @@ const FooterLinksManager = () => {
 
   const [linkForm, setLinkForm] = useState(initialLinkState);
 
-  // ICONOS MODERNOS Y ACTUALES COMPLETAMENTE RENOVADOS
+  // Iconos predefinidos disponibles
   const availableIcons = [
-    // Redes Sociales Principales
-    { value: 'AiOutlineTwitter', label: '🐦 Twitter / X', component: 'AiOutlineTwitter', category: 'social' },
-    { value: 'AiFillLinkedin', label: '💼 LinkedIn', component: 'AiFillLinkedin', category: 'social' },
-    { value: 'AiFillGithub', label: '🐙 GitHub', component: 'AiFillGithub', category: 'dev' },
-    { value: 'AiFillFacebook', label: '📘 Facebook', component: 'AiFillFacebook', category: 'social' },
-    { value: 'AiFillInstagram', label: '📷 Instagram', component: 'AiFillInstagram', category: 'social' },
-    { value: 'AiFillYoutube', label: '📺 YouTube', component: 'AiFillYoutube', category: 'social' },
-    { value: 'AiOutlineWhatsApp', label: '💬 WhatsApp', component: 'AiOutlineWhatsApp', category: 'messaging' },
-    
-    // Plataformas Modernas
-    { value: 'AiFillTikTok', label: '🎵 TikTok', component: 'AiFillTikTok', category: 'social' },
-    { value: 'AiFillDiscord', label: '🎮 Discord', component: 'AiFillDiscord', category: 'gaming' },
-    { value: 'AiFillTwitch', label: '🟣 Twitch', component: 'AiFillTwitch', category: 'gaming' },
-    { value: 'AiFillReddit', label: '🔴 Reddit', component: 'AiFillReddit', category: 'social' },
-    { value: 'AiFillSnapchat', label: '👻 Snapchat', component: 'AiFillSnapchat', category: 'social' },
-    { value: 'AiFillPinterest', label: '📌 Pinterest', component: 'AiFillPinterest', category: 'social' },
-    
-    // Desarrollo y Tecnología
-    { value: 'AiFillGitlab', label: '🦊 GitLab', component: 'AiFillGitlab', category: 'dev' },
-    { value: 'AiFillBitbucket', label: '🔵 Bitbucket', component: 'AiFillBitbucket', category: 'dev' },
-    { value: 'AiFillCodepen', label: '✏️ CodePen', component: 'AiFillCodepen', category: 'dev' },
-    { value: 'AiFillStackOverflow', label: '📚 Stack Overflow', component: 'AiFillStackOverflow', category: 'dev' },
-    
-    // Comunicación
-    { value: 'AiOutlineMail', label: '📧 Email', component: 'AiOutlineMail', category: 'contact' },
-    { value: 'AiOutlinePhone', label: '📞 Teléfono', component: 'AiOutlinePhone', category: 'contact' },
-    { value: 'AiFillSlack', label: '💬 Slack', component: 'AiFillSlack', category: 'messaging' },
-    { value: 'AiFillSkype', label: '🔵 Skype', component: 'AiFillSkype', category: 'messaging' },
-    { value: 'AiFillTelegram', label: '✈️ Telegram', component: 'AiFillTelegram', category: 'messaging' },
-    
-    // Profesional y Negocios
-    { value: 'AiFillBehance', label: '🎨 Behance', component: 'AiFillBehance', category: 'creative' },
-    { value: 'AiFillDribbble', label: '🏀 Dribbble', component: 'AiFillDribbble', category: 'creative' },
-    { value: 'AiFillFigma', label: '🎨 Figma', component: 'AiFillFigma', category: 'design' },
-    { value: 'AiFillNotion', label: '📝 Notion', component: 'AiFillNotion', category: 'productivity' },
-    
-    // Música y Entretenimiento
-    { value: 'AiFillSpotify', label: '🎵 Spotify', component: 'AiFillSpotify', category: 'music' },
-    { value: 'AiFillSoundCloud', label: '☁️ SoundCloud', component: 'AiFillSoundCloud', category: 'music' },
-    { value: 'AiFillApple', label: '🍎 Apple Music', component: 'AiFillApple', category: 'music' },
-    { value: 'AiFillNetflix', label: '🎬 Netflix', component: 'AiFillNetflix', category: 'entertainment' },
-    
-    // Otros
-    { value: 'AiOutlineGlobal', label: '🌐 Sitio Web', component: 'AiOutlineGlobal', category: 'web' },
-    { value: 'AiFillShop', label: '🛒 Tienda Online', component: 'AiFillShop', category: 'business' },
-    { value: 'AiFillBlog', label: '📝 Blog', component: 'AiFillBlog', category: 'content' },
-    { value: 'AiFillPortfolio', label: '💼 Portfolio', component: 'AiFillPortfolio', category: 'professional' }
+    { value: 'AiOutlineTwitter', label: '🐦 Twitter', component: 'AiOutlineTwitter' },
+    { value: 'AiFillLinkedin', label: '💼 LinkedIn', component: 'AiFillLinkedin' },
+    { value: 'AiFillGithub', label: '🐙 GitHub', component: 'AiFillGithub' },
+    { value: 'AiFillFacebook', label: '📘 Facebook', component: 'AiFillFacebook' },
+    { value: 'AiFillInstagram', label: '📷 Instagram', component: 'AiFillInstagram' },
+    { value: 'AiFillYoutube', label: '📺 YouTube', component: 'AiFillYoutube' },
+    { value: 'AiOutlineWhatsApp', label: '💬 WhatsApp', component: 'AiOutlineWhatsApp' },
+    { value: 'AiOutlineMail', label: '📧 Email', component: 'AiOutlineMail' },
+    { value: 'AiOutlinePhone', label: '📞 Teléfono', component: 'AiOutlinePhone' },
+    { value: 'AiOutlineGlobal', label: '🌐 Sitio Web', component: 'AiOutlineGlobal' }
   ];
 
   // Cargar footer links desde localStorage
@@ -79,6 +42,7 @@ const FooterLinksManager = () => {
         if (parsedConfig.footerLinks) {
           setFooterLinks(parsedConfig.footerLinks);
         } else {
+          // Cargar links por defecto si no existen
           loadDefaultLinks();
         }
       } catch (error) {
@@ -240,32 +204,6 @@ const FooterLinksManager = () => {
     return icon ? icon.label : iconName;
   };
 
-  // Agrupar iconos por categoría
-  const groupedIcons = availableIcons.reduce((acc, icon) => {
-    if (!acc[icon.category]) {
-      acc[icon.category] = [];
-    }
-    acc[icon.category].push(icon);
-    return acc;
-  }, {});
-
-  const categoryLabels = {
-    social: '📱 Redes Sociales',
-    dev: '💻 Desarrollo',
-    messaging: '💬 Mensajería',
-    gaming: '🎮 Gaming',
-    creative: '🎨 Creatividad',
-    design: '🎨 Diseño',
-    productivity: '📋 Productividad',
-    music: '🎵 Música',
-    entertainment: '🎬 Entretenimiento',
-    contact: '📞 Contacto',
-    web: '🌐 Web',
-    business: '💼 Negocios',
-    content: '📝 Contenido',
-    professional: '👔 Profesional'
-  };
-
   return (
     <div className={styles.footerLinksManager}>
       <div className={styles.header}>
@@ -287,10 +225,10 @@ const FooterLinksManager = () => {
 
       <div className={styles.infoBox}>
         <h4>ℹ️ Información Importante</h4>
-        <p>Los cambios se aplican automáticamente en el footer de la tienda. Ahora incluye iconos modernos de todas las plataformas actuales: TikTok, Discord, Twitch, Figma, Notion, Spotify y muchas más. Para exportar los cambios permanentemente, ve a la sección "🗂️ Sistema Backup".</p>
+        <p>Los cambios se aplican automáticamente en el footer de la tienda. Los links se muestran como iconos sociales en la parte inferior de todas las páginas. Para exportar los cambios permanentemente, ve a la sección "🗂️ Sistema Backup".</p>
       </div>
 
-      {/* ESTADÍSTICAS MEJORADAS */}
+      {/* ESTADÍSTICAS */}
       <div className={styles.statsContainer}>
         <div className={styles.statCard}>
           <h4>📊 Estado Actual de Footer Links</h4>
@@ -300,16 +238,12 @@ const FooterLinksManager = () => {
               <span className={styles.statLabel}>Total Links</span>
             </div>
             <div className={styles.statItem}>
-              <span className={styles.statNumber}>{footerLinks.filter(link => 
-                ['AiOutlineTwitter', 'AiFillLinkedin', 'AiFillFacebook', 'AiFillInstagram', 'AiFillTikTok'].includes(link.icon)
-              ).length}</span>
+              <span className={styles.statNumber}>{footerLinks.filter(link => link.url.includes('social')).length}</span>
               <span className={styles.statLabel}>Redes Sociales</span>
             </div>
             <div className={styles.statItem}>
-              <span className={styles.statNumber}>{footerLinks.filter(link => 
-                ['AiFillGithub', 'AiFillGitlab', 'AiFillCodepen', 'AiFillStackOverflow'].includes(link.icon)
-              ).length}</span>
-              <span className={styles.statLabel}>Desarrollo</span>
+              <span className={styles.statNumber}>{footerLinks.filter(link => link.url.includes('github')).length}</span>
+              <span className={styles.statLabel}>Repositorios</span>
             </div>
           </div>
         </div>
@@ -328,7 +262,7 @@ const FooterLinksManager = () => {
 
           <div className={styles.formGrid}>
             <div className={styles.formGroup}>
-              <label>Icono Moderno * (Categorizado)</label>
+              <label>Icono *</label>
               <select
                 name="icon"
                 value={linkForm.icon}
@@ -336,15 +270,11 @@ const FooterLinksManager = () => {
                 className="form-select"
                 required
               >
-                <option value="">Seleccionar icono moderno</option>
-                {Object.entries(groupedIcons).map(([category, icons]) => (
-                  <optgroup key={category} label={categoryLabels[category]}>
-                    {icons.map(icon => (
-                      <option key={icon.value} value={icon.value}>
-                        {icon.label}
-                      </option>
-                    ))}
-                  </optgroup>
+                <option value="">Seleccionar icono</option>
+                {availableIcons.map(icon => (
+                  <option key={icon.value} value={icon.value}>
+                    {icon.label}
+                  </option>
                 ))}
               </select>
             </div>
@@ -357,7 +287,7 @@ const FooterLinksManager = () => {
                 value={linkForm.label}
                 onChange={handleInputChange}
                 className="form-input"
-                placeholder="Ej: Mi TikTok"
+                placeholder="Ej: Mi Twitter"
                 required
               />
             </div>
@@ -395,7 +325,7 @@ const FooterLinksManager = () => {
         {footerLinks.length === 0 ? (
           <div className={styles.emptyState}>
             <h3>🔗 No hay links creados</h3>
-            <p>Crea tu primer link para el footer de la tienda con iconos modernos.</p>
+            <p>Crea tu primer link para el footer de la tienda.</p>
             <button 
               className="btn btn-primary"
               onClick={() => setShowForm(true)}
