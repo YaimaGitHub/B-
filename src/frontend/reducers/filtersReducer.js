@@ -10,7 +10,7 @@ export const initialFiltersState = {
   allProducts: [],
   filteredProducts: [],
   minPrice: 0,
-  maxPrice: Infinity, // will be handled
+  maxPrice: Infinity,
   filters: {
     search: '',
     category: null,
@@ -23,101 +23,26 @@ export const initialFiltersState = {
   displayableProductsLength: 0,
 };
 
-/* 
-  category: {
-    laptop: false,
-    tv: false,
-    earphone: false,
-    smartwatch: false,
-    mobile: false
-  }
-*/
-
-// Función mejorada para calcular rangos de precio dinámicos y adaptativos
-const calculateDynamicPriceRange = (products) => {
-  console.log('🔍 Calculando rango de precios para', products?.length || 0, 'productos');
-  
+// FUNCIÓN MEJORADA PARA CALCULAR RANGOS DE PRECIO DINÁMICOS
+const calculatePriceRange = (products) => {
   if (!products || products.length === 0) {
-    console.log('⚠️ No hay productos, usando rango por defecto');
     return { minPrice: 0, maxPrice: 100000 };
   }
 
-  // Filtrar productos con precios válidos
-  const validProducts = products.filter(product => 
-    product && 
-    typeof product.price === 'number' && 
-    product.price > 0 && 
-    !isNaN(product.price)
-  );
-  
-  if (validProducts.length === 0) {
-    console.log('⚠️ No hay productos con precios válidos, usando rango por defecto');
-    return { minPrice: 0, maxPrice: 100000 };
-  }
-
-  const prices = validProducts.map(({ price }) => price);
+  const prices = products.map(({ price }) => price);
   const minPrice = Math.min(...prices);
   const maxPrice = Math.max(...prices);
   
-  console.log(`📊 Precios encontrados: Min=${minPrice.toLocaleString()}, Max=${maxPrice.toLocaleString()}`);
+  // Agregar un pequeño margen para mejor UX
+  const margin = (maxPrice - minPrice) * 0.05; // 5% de margen
+  const adjustedMin = Math.max(0, Math.floor(minPrice - margin));
+  const adjustedMax = Math.ceil(maxPrice + margin);
   
-  // Calcular rango y margen adaptativo
-  const priceRange = maxPrice - minPrice;
-  
-  // Margen adaptativo: 10% para rangos pequeños, 5% para rangos grandes
-  const marginPercent = priceRange < 50000 ? 0.1 : 0.05;
-  const margin = priceRange * marginPercent;
-  
-  // Aplicar margen con límites sensatos
-  const adjustedMinPrice = Math.max(0, minPrice - margin);
-  const adjustedMaxPrice = maxPrice + margin;
-  
-  // Redondeo inteligente basado en el rango de precios
-  let roundingFactor;
-  if (adjustedMaxPrice <= 10000) {
-    roundingFactor = 100; // Redondear a centenas
-  } else if (adjustedMaxPrice <= 100000) {
-    roundingFactor = 1000; // Redondear a miles
-  } else {
-    roundingFactor = 10000; // Redondear a decenas de miles
-  }
-  
-  const roundedMinPrice = Math.floor(adjustedMinPrice / roundingFactor) * roundingFactor;
-  const roundedMaxPrice = Math.ceil(adjustedMaxPrice / roundingFactor) * roundingFactor;
-  
-  // Verificar que el rango sea sensato
-  const finalMinPrice = Math.max(0, roundedMinPrice);
-  const finalMaxPrice = Math.max(finalMinPrice + roundingFactor, roundedMaxPrice);
-  
-  console.log(`💰 Rango final calculado: ${finalMinPrice.toLocaleString()} - ${finalMaxPrice.toLocaleString()} CUP`);
-  console.log(`🎯 Factor de redondeo usado: ${roundingFactor.toLocaleString()}`);
-  console.log(`📈 Margen aplicado: ${marginPercent * 100}%`);
+  console.log(`📊 Rango de precios calculado: ${adjustedMin} - ${adjustedMax} CUP`);
   
   return {
-    minPrice: finalMinPrice,
-    maxPrice: finalMaxPrice
-  };
-};
-
-// Función para sincronizar el rango de precios con productos actualizados
-const syncPriceRangeWithProducts = (state, newProducts) => {
-  const { minPrice, maxPrice } = calculateDynamicPriceRange(newProducts);
-  
-  // Actualizar el rango de precios en los filtros si es necesario
-  const currentPriceFilter = state.filters.price;
-  const needsUpdate = 
-    currentPriceFilter[0] < minPrice || 
-    currentPriceFilter[1] > maxPrice ||
-    (currentPriceFilter[0] === state.minPrice && currentPriceFilter[1] === state.maxPrice);
-  
-  const updatedPriceFilter = needsUpdate ? [minPrice, maxPrice] : currentPriceFilter;
-  
-  console.log(`🔄 Sincronización de precios: ${needsUpdate ? 'ACTUALIZADO' : 'MANTENIDO'}`);
-  
-  return {
-    minPrice,
-    maxPrice,
-    priceFilter: updatedPriceFilter
+    minPrice: adjustedMin,
+    maxPrice: adjustedMax
   };
 };
 
@@ -125,15 +50,15 @@ export const filtersReducer = (state, action) => {
   switch (action.type) {
     case FILTERS_ACTION.GET_PRODUCTS_FROM_PRODUCT_CONTEXT:
       const allProductsCloned = structuredClone(action.payload?.products);
+      
+      // CÁLCULO DINÁMICO DE RANGOS DE PRECIO MEJORADO
+      const { minPrice, maxPrice } = calculatePriceRange(allProductsCloned);
 
       const filteredProducts = givePaginatedList(allProductsCloned);
 
       const allCategoryNames = action.payload?.categories
-        ?.filter(category => !category.disabled) // Solo categorías habilitadas
-        ?.map(({ categoryName }) => categoryName) || [];
-
-      // Calcular rango de precios dinámico y adaptativo
-      const { minPrice, maxPrice } = calculateDynamicPriceRange(allProductsCloned);
+        .filter(category => !category.disabled) // Solo categorías habilitadas
+        .map(({ categoryName }) => categoryName);
 
       return {
         ...state,
@@ -146,6 +71,7 @@ export const filtersReducer = (state, action) => {
           category: convertArrayToObjectWithPropertyFALSE(allCategoryNames),
           price: [minPrice, maxPrice],
         },
+        displayableProductsLength: allProductsCloned.length,
       };
 
     case FILTERS_ACTION.UPDATE_CATEGORY:
@@ -170,7 +96,6 @@ export const filtersReducer = (state, action) => {
         },
       };
 
-    // called onchange of filters
     case FILTERS_ACTION.UPDATE_FILTERS:
       return {
         ...state,
@@ -187,7 +112,7 @@ export const filtersReducer = (state, action) => {
         filters: {
           ...state.filters,
           category: {
-            ...state.category,
+            ...state.filters.category,
             [action.payloadCategory]: true,
           },
         },
@@ -198,22 +123,14 @@ export const filtersReducer = (state, action) => {
       const allUncheckedCategoryObj = convertArrayToObjectWithPropertyFALSE(
         Object.keys(category)
       );
-      
-      // Recalcular rango de precios al limpiar filtros para asegurar sincronización
-      const { minPrice: resetMinPrice, maxPrice: resetMaxPrice } = calculateDynamicPriceRange(state.allProducts);
-      
-      console.log('🧹 Limpiando filtros y recalculando rango de precios');
-      
       return {
         ...state,
-        minPrice: resetMinPrice,
-        maxPrice: resetMaxPrice,
         filters: {
           ...state.filters,
           search: '',
           category: allUncheckedCategoryObj,
           company: 'all',
-          price: [resetMinPrice, resetMaxPrice],
+          price: [state.minPrice, state.maxPrice],
           rating: -1,
           sortByOption: '',
         },
@@ -242,17 +159,22 @@ export const filtersReducer = (state, action) => {
         (categoryBool) => categoryBool
       );
 
-      // this temp products will become filteredProducts
       let tempProducts = allProducts;
 
-      // search handled here
-      // company is not filtered here after submitting!!
-      tempProducts = allProducts.filter(({ name }) => {
+      // FILTRO DE BÚSQUEDA MEJORADO
+      tempProducts = allProducts.filter(({ name, description, company, category }) => {
         const trimmedSearchText = searchText.trim();
-        return lowerizeAndCheckIncludes(name, trimmedSearchText);
+        if (!trimmedSearchText) return true;
+        
+        return (
+          lowerizeAndCheckIncludes(name, trimmedSearchText) ||
+          lowerizeAndCheckIncludes(description || '', trimmedSearchText) ||
+          lowerizeAndCheckIncludes(company, trimmedSearchText) ||
+          lowerizeAndCheckIncludes(category, trimmedSearchText)
+        );
       });
 
-      // category checkbox handled here
+      // FILTRO DE CATEGORÍA
       if (isAnyCheckboxChecked) {
         tempProducts = tempProducts.filter(
           ({ category: categoryPropertyOfProduct }) =>
@@ -260,7 +182,7 @@ export const filtersReducer = (state, action) => {
         );
       }
 
-      // company dropdown handled here
+      // FILTRO DE MARCA
       if (companyInState !== 'all') {
         tempProducts = tempProducts.filter(
           ({ company: companyPropertyOfProduct }) =>
@@ -268,7 +190,7 @@ export const filtersReducer = (state, action) => {
         );
       }
 
-      // price handled here, no (if) condition, this will run always!!
+      // FILTRO DE PRECIO MEJORADO CON VALIDACIÓN
       tempProducts = tempProducts.filter(
         ({ price: pricePropertyOfProduct }) => {
           const [currMinPriceRange, currMaxPriceRange] = priceInState;
@@ -279,10 +201,12 @@ export const filtersReducer = (state, action) => {
         }
       );
 
-      // ratings handled here, no (if) condition, this will run always!!
-      tempProducts = tempProducts.filter(({ stars }) => stars >= ratingInState);
+      // FILTRO DE CALIFICACIÓN
+      if (ratingInState > -1) {
+        tempProducts = tempProducts.filter(({ stars }) => stars >= ratingInState);
+      }
 
-      // sort handled here!!, if sortByOption is '', ignore sorting
+      // ORDENAMIENTO MEJORADO
       if (!!sortByOption) {
         switch (sortByOption) {
           case SORT_TYPE.PRICE_LOW_TO_HIGH: {
@@ -297,53 +221,36 @@ export const filtersReducer = (state, action) => {
 
           case SORT_TYPE.NAME_A_TO_Z: {
             tempProducts = [...tempProducts].sort((a, b) => {
-              a = a.name.toLowerCase();
-              b = b.name.toLowerCase();
-
-              if (a > b) return 1;
-
-              if (a < b) return -1;
-
-              return 0;
+              return a.name.toLowerCase().localeCompare(b.name.toLowerCase());
             });
             break;
           }
 
           case SORT_TYPE.NAME_Z_TO_A: {
             tempProducts = [...tempProducts].sort((a, b) => {
-              a = a.name.toLowerCase();
-              b = b.name.toLowerCase();
-
-              if (a > b) return -1;
-              if (a < b) return 1;
-              return 0;
+              return b.name.toLowerCase().localeCompare(a.name.toLowerCase());
             });
-
             break;
           }
 
           default:
-            throw new Error(`${sortByOption} is not defined`);
+            console.warn(`Tipo de ordenamiento no reconocido: ${sortByOption}`);
         }
       }
 
-      // pagination logic
-      tempProducts = givePaginatedList(tempProducts);
+      // PAGINACIÓN
+      const paginatedProducts = givePaginatedList(tempProducts);
 
-      // Verificar si necesitamos sincronizar el rango de precios después del filtrado
-      const filteredProductsFlat = tempProducts.flat();
-      if (filteredProductsFlat.length > 0) {
-        const { minPrice: filteredMinPrice, maxPrice: filteredMaxPrice } = calculateDynamicPriceRange(filteredProductsFlat);
-        console.log(`🎯 Productos filtrados: rango ${filteredMinPrice.toLocaleString()} - ${filteredMaxPrice.toLocaleString()}`);
-      }
+      console.log(`🔍 Filtros aplicados: ${tempProducts.length} productos encontrados`);
 
       return {
         ...state,
-        filteredProducts: tempProducts,
-        displayableProductsLength: tempProducts.flat().length,
+        filteredProducts: paginatedProducts,
+        displayableProductsLength: tempProducts.length,
         paginateIndex: 0,
       };
+
     default:
-      throw new Error(`Error: ${action.type} in filtersReducer does not exist`);
+      throw new Error(`Error: ${action.type} en filtersReducer no existe`);
   }
 };

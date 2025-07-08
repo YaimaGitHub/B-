@@ -1,4 +1,12 @@
-import { AiFillGithub, AiFillLinkedin, AiOutlineTwitter } from 'react-icons/ai';
+import { 
+  AiFillGithub, 
+  AiFillLinkedin, 
+  AiOutlineTwitter,
+  AiFillFacebook,
+  AiOutlineApi
+} from 'react-icons/ai';
+import { FaNetworkWired } from 'react-icons/fa';
+import { DiDatabase } from 'react-icons/di';
 import { v4 as uuid } from 'uuid';
 
 export const FOOTER_LINKS = [
@@ -16,8 +24,32 @@ export const FOOTER_LINKS = [
     id: 3,
     icon: <AiFillGithub />,
     url: 'https://github.com/swastikpatro',
-  }
+  },
+  {
+    id: 4,
+    icon: <AiFillFacebook />,
+    url: 'https://facebook.com/yeroshop',
+  },
+  {
+    id: 5,
+    icon: <FaNetworkWired />,
+    url: 'https://yeroshop.vercel.app',
+  },
 ];
+
+// ICONOS DISPONIBLES PARA IMPORTACIÓN Y USO
+export const AVAILABLE_ICONS = {
+  // React Icons AI
+  AiFillGithub,
+  AiFillLinkedin,
+  AiOutlineTwitter,
+  AiFillFacebook,
+  AiOutlineApi,
+  // React Icons FA
+  FaNetworkWired,
+  // React Icons DI
+  DiDatabase,
+};
 
 export const ToastType = {
   Warn: 'warn',
@@ -61,6 +93,9 @@ export const LOGIN_CLICK_TYPE = {
   GuestClick: 'guest',
   RegisterClick: 'register',
   AdminClick: 'admin',
+  GoogleClick: 'google',
+  FacebookClick: 'facebook',
+  AppleClick: 'apple',
 };
 
 export const INCREMENT_DECRMENT_TYPE = {
@@ -257,7 +292,7 @@ export const DEFAULT_STORE_CONFIG = {
   "storeName": "Yero Shop!",
   "whatsappNumber": "+53 54690878",
   "storeAddress": "Santiago de Cuba, Cuba",
-  "lastModified": "2025-07-07T03:37:42.991Z",
+  "lastModified": "2025-07-05T03:46:50.315Z",
   "version": "1.0.0"
 };
 
@@ -303,36 +338,119 @@ export const PRODUCT_CATEGORY_ICONS = {
   'default': '📦'
 };
 
-// CONSTANTES DE MONEDA - ACTUALIZADAS DINÁMICAMENTE
+// CONSTANTES DE MONEDA
 export const CURRENCIES = {
-  "CUP": {
-    "code": "CUP",
-    "name": "Peso Cubano",
-    "symbol": "$",
-    "flag": "🇨🇺",
-    "rate": 1
+  CUP: {
+    code: 'CUP',
+    name: 'Peso Cubano',
+    symbol: '$',
+    flag: '🇨🇺',
+    rate: 1,
   },
-  "USD": {
-    "code": "USD",
-    "name": "Dólar Estadounidense",
-    "symbol": "$",
-    "flag": "🇺🇸",
-    "rate": 384
+  USD: {
+    code: 'USD',
+    name: 'Dólar Estadounidense',
+    symbol: '$',
+    flag: '🇺🇸',
+    rate: 384,
   },
-  "EUR": {
-    "code": "EUR",
-    "name": "Euro",
-    "symbol": "€",
-    "flag": "🇪🇺",
-    "rate": 425
+  EUR: {
+    code: 'EUR',
+    name: 'Euro',
+    symbol: '€',
+    flag: '🇪🇺',
+    rate: 425,
   },
-  "MLC": {
-    "code": "MLC",
-    "name": "Moneda Libremente Convertible",
-    "symbol": "MLC",
-    "flag": "🏦",
-    "rate": 250
-  }
+  MLC: {
+    code: 'MLC',
+    name: 'Moneda Libremente Convertible',
+    symbol: 'MLC',
+    flag: '🏦',
+    rate: 250,
+  },
 };
 
 export const DEFAULT_CURRENCY = 'CUP';
+
+// PROVEEDORES DE EMAIL SOPORTADOS PARA REGISTRO
+export const EMAIL_PROVIDERS = {
+  GMAIL: {
+    name: 'Gmail',
+    domains: ['gmail.com', 'googlemail.com'],
+    icon: '📧',
+    color: '#ea4335',
+    authUrl: 'https://accounts.google.com/oauth/authorize',
+  },
+  OUTLOOK: {
+    name: 'Outlook',
+    domains: ['outlook.com', 'hotmail.com', 'live.com', 'msn.com'],
+    icon: '📨',
+    color: '#0078d4',
+    authUrl: 'https://login.microsoftonline.com/common/oauth2/v2.0/authorize',
+  },
+  YAHOO: {
+    name: 'Yahoo! Mail',
+    domains: ['yahoo.com', 'yahoo.es', 'ymail.com', 'rocketmail.com'],
+    icon: '📮',
+    color: '#6001d2',
+    authUrl: 'https://api.login.yahoo.com/oauth2/request_auth',
+  },
+  APPLE: {
+    name: 'iCloud Mail',
+    domains: ['icloud.com', 'me.com', 'mac.com'],
+    icon: '📧',
+    color: '#000000',
+    authUrl: 'https://appleid.apple.com/auth/authorize',
+  },
+  PROTONMAIL: {
+    name: 'ProtonMail',
+    domains: ['protonmail.com', 'proton.me', 'pm.me'],
+    icon: '🔒',
+    color: '#6d4aff',
+    authUrl: null, // ProtonMail no tiene OAuth público
+  },
+  AOL: {
+    name: 'AOL Mail',
+    domains: ['aol.com', 'aim.com'],
+    icon: '📬',
+    color: '#ff0b00',
+    authUrl: 'https://api.login.aol.com/oauth2/request_auth',
+  },
+  FASTMAIL: {
+    name: 'Fastmail',
+    domains: ['fastmail.com', 'fastmail.fm'],
+    icon: '⚡',
+    color: '#2e5c8a',
+    authUrl: null, // Fastmail no tiene OAuth público estándar
+  },
+  ZOHO: {
+    name: 'Zoho Mail',
+    domains: ['zoho.com', 'zohomail.com'],
+    icon: '📧',
+    color: '#e42527',
+    authUrl: 'https://accounts.zoho.com/oauth/v2/auth',
+  },
+};
+
+// VALIDACIÓN DE DOMINIOS DE EMAIL
+export const validateEmailDomain = (email) => {
+  const domain = email.split('@')[1]?.toLowerCase();
+  if (!domain) return null;
+
+  for (const [providerKey, provider] of Object.entries(EMAIL_PROVIDERS)) {
+    if (provider.domains.includes(domain)) {
+      return {
+        provider: providerKey,
+        ...provider,
+      };
+    }
+  }
+
+  return {
+    provider: 'OTHER',
+    name: 'Otro proveedor',
+    icon: '📧',
+    color: '#666666',
+    authUrl: null,
+  };
+};
