@@ -257,7 +257,7 @@ export const DEFAULT_STORE_CONFIG = {
   "storeName": "Yero Shop!",
   "whatsappNumber": "+53 54690878",
   "storeAddress": "Santiago de Cuba, Cuba",
-  "lastModified": "2025-07-09T16:11:57.931Z",
+  "lastModified": "2025-07-08T21:54:30.852Z",
   "version": "1.0.0"
 };
 
