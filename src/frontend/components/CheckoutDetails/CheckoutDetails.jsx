@@ -341,7 +341,16 @@ const CheckoutDetails = ({
     console.log('📱 Dispositivo:', device);
     console.log('📞 Número de WhatsApp:', storeConfig.storeInfo?.whatsappNumber || '+53 54690878');
     
-    let message = `🛒 *NUEVO PEDIDO #${orderNumber}*\n\n`;
+    // Incluir imagen de la tienda al inicio del mensaje
+    let message = `🏪 *YERO SHOP!* - Tu tienda online de confianza\n`;
+    message += `📸 Imagen: ${window.location.origin}/lovepik.png\n\n`;
+    
+    // Número de orden con diseño moderno y animado
+    message += `✨ ═══════════════════════════════════ ✨\n`;
+    message += `🎯 *NUEVO PEDIDO*\n`;
+    message += `🔥 *#${orderNumber}* 🔥\n`;
+    message += `✨ ═══════════════════════════════════ ✨\n\n`;
+    
     message += `---------------------------------------------------------------\n`;
     message += `👤 *INFORMACIÓN DEL CLIENTE*\n`;
     message += `---------------------------------------------------------------\n`;
@@ -352,6 +361,8 @@ const CheckoutDetails = ({
     // Información del servicio con mejor formato
     message += `🚚 *DETALLES DE ENTREGA*\n`;
     message += `---------------------------------------------------------------\n`;
+    message += `👤 *Nombre Completo del Cliente:* ${selectedAddress.username}\n`;
+    message += `📱 *Número de Móvil del Cliente:* ${selectedAddress.mobile}\n`;
     
     if (selectedAddress.serviceType === SERVICE_TYPES.HOME_DELIVERY) {
       const zoneName = SANTIAGO_ZONES.find(z => z.id === selectedAddress.zone)?.name;
@@ -369,7 +380,7 @@ const CheckoutDetails = ({
       }
     }
     
-    message += `📞 *Teléfono de contacto:* ${selectedAddress.mobile}\n\n`;
+    message += `\n`;
     
     // Productos con iconos y mejor formato
     message += `🛍️ *PRODUCTOS SOLICITADOS*\n`;
@@ -416,6 +427,12 @@ const CheckoutDetails = ({
       minute: '2-digit',
       timeZone: 'America/Havana'
     })}\n\n`;
+    
+    // Número de orden destacado al final
+    message += `🎯 *NÚMERO DE PEDIDO PARA REFERENCIA:*\n`;
+    message += `🌟 ═══════════════════════════════════ 🌟\n`;
+    message += `🔥 *#${orderNumber}* 🔥\n`;
+    message += `🌟 ═══════════════════════════════════ 🌟\n\n`;
     
     message += `📋 *Instrucciones importantes:*\n`;
     message += `• Confirme la disponibilidad de los productos\n`;
