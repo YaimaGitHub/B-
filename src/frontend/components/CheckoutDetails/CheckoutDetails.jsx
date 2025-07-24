@@ -341,13 +341,17 @@ const CheckoutDetails = ({
     console.log('📱 Dispositivo:', device);
     console.log('📞 Número de WhatsApp:', storeConfig.storeInfo?.whatsappNumber || '+53 54690878');
     
-    // CATÁLOGO PROFESIONAL CON IMAGEN DE LA TIENDA
-    let message = `🏪 *YERO SHOP!* - Tu tienda online de confianza\n`;
-    message += `📸 Imagen del catálogo: https://f005.backblazeb2.com/file/120000/Yero+Shop/lovepik.png\n\n`;
+    // CATÁLOGO PROFESIONAL CON IMAGEN DE LA TIENDA - FORMATO CORRECTO PARA WHATSAPP
+    let message = `🏪 *YERO SHOP!* - Tu tienda online de confianza\n\n`;
+    
+    // IMAGEN DEL CATÁLOGO - FORMATO QUE WHATSAPP RECONOCE CORRECTAMENTE
+    message += `📸 *VER NUESTRO CATÁLOGO COMPLETO:*\n`;
+    message += `https://f005.backblazeb2.com/file/120000/Yero+Shop/lovepik.png\n\n`;
+    message += `👆 *Haz clic en el enlace de arriba para ver todas nuestras ofertas* 👆\n\n`;
     
     // Separador visual profesional
     message += `═══════════════════════════════════════════════════════════════\n`;
-    message += `🛍️ *CATÁLOGO DIGITAL PROFESIONAL* 🛍️\n`;
+    message += `🛍️ *PEDIDO DESDE NUESTRO CATÁLOGO DIGITAL* 🛍️\n`;
     message += `═══════════════════════════════════════════════════════════════\n\n`;
     
     // Número de orden con diseño moderno y animado
@@ -468,8 +472,13 @@ const CheckoutDetails = ({
     message += `═══════════════════════════════════════════════════════════════\n`;
     message += `¡Gracias por confiar en nosotros! 🙏\n`;
     message += `Su satisfacción es nuestra prioridad 💯\n`;
-    message += `═══════════════════════════════════════════════════════════════\n`;
-    message += `📸 Ver catálogo completo: https://f005.backblazeb2.com/file/120000/Yero+Shop/lovepik.png\n`;
+    message += `═══════════════════════════════════════════════════════════════\n\n`;
+    
+    // IMAGEN DEL CATÁLOGO AL FINAL - FORMATO MEJORADO PARA WHATSAPP
+    message += `🖼️ *CATÁLOGO VISUAL COMPLETO:*\n`;
+    message += `https://f005.backblazeb2.com/file/120000/Yero+Shop/lovepik.png\n\n`;
+    message += `👆 *¡Haz clic para ver nuestro catálogo completo con imágenes!* 👆\n`;
+    message += `📱 *Guarda este enlace para futuras compras* 📱\n\n`;
     message += `═══════════════════════════════════════════════════════════════`;
 
     // Generar URLs según el dispositivo
