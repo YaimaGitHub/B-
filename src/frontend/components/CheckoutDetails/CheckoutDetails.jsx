@@ -6,7 +6,7 @@ import styles from './CheckoutDetails.module.css';
 import { useState } from 'react';
 import { VscChromeClose } from 'react-icons/vsc';
 
-import { CHARGE_AND_DISCOUNT, ToastType, SERVICE_TYPES, PRODUCT_CATEGORY_ICONS } from '../../constants/constants';
+import { CHARGE_AND_DISCOUNT, ToastType, SERVICE_TYPES, PRODUCT_CATEGORY_ICONS, PAYMENT_METHODS, BANK_TRANSFER_SURCHARGE_PERCENT } from '../../constants/constants';
 import CouponSearch from './CouponSearch';
 import { toastHandler, Popper, generateOrderNumber } from '../../utils/utils';
 
@@ -16,6 +16,7 @@ import { useNavigate } from 'react-router-dom';
 const CheckoutDetails = ({
   timer,
   activeAddressId: activeAddressIdFromProps,
+  selectedPaymentMethod,
   updateCheckoutStatus,
 }) => {
   const {
@@ -54,11 +55,17 @@ const CheckoutDetails = ({
     ? -Math.floor((totalAmountFromContext * activeCoupon.discountPercent) / 100)
     : 0;
 
+  // Calcular recargo bancario si aplica
+  const bankTransferSurcharge = selectedPaymentMethod === PAYMENT_METHODS.BANK_TRANSFER
+    ? Math.floor(totalAmountFromContext * (BANK_TRANSFER_SURCHARGE_PERCENT / 100))
+    : 0;
+
   const finalPriceToPay =
     totalAmountFromContext +
     deliveryCost +
     CHARGE_AND_DISCOUNT.discount +
-    priceAfterCouponApplied;
+    priceAfterCouponApplied +
+    bankTransferSurcharge;
 
   const updateActiveCoupon = (couponObjClicked) => {
     setActiveCoupon(couponObjClicked);
@@ -408,6 +415,22 @@ const CheckoutDetails = ({
     message += `🆔 *Número de Pedido:* #${orderNumber}\n`;
     message += `💰 *Moneda seleccionada:* ${currency.flag} ${currency.name} (${currency.code})\n\n`;
     
+    // Información del método de pago
+    message += `---------------------\n`;
+    message += `💳 *MÉTODO DE PAGO*\n`;
+    message += `---------------------\n`;
+    if (selectedPaymentMethod === PAYMENT_METHODS.CASH) {
+      message += `💵 *Modalidad:* Pago en Efectivo\n`;
+      message += `✅ *Ventajas:* Sin recargos adicionales\n`;
+      message += `📍 *Lugar de pago:* En el momento de la entrega/recogida\n`;
+    } else {
+      message += `🏦 *Modalidad:* Transferencia Bancaria\n`;
+      message += `📊 *Recargo aplicado:* ${BANK_TRANSFER_SURCHARGE_PERCENT}% (${formatPriceWithCode(bankTransferSurcharge)})\n`;
+      message += `💡 *Motivo del recargo:* Costos de procesamiento bancario\n`;
+      message += `🏦 *Instrucciones:* Se proporcionarán datos bancarios para la transferencia\n`;
+    }
+    message += `\n`;
+    
     // Información del servicio con mejor formato
     message += `---------------------\n`;
     message += `🚛 *DETALLES DE ENTREGA*\n`;
@@ -473,9 +496,14 @@ const CheckoutDetails = ({
       message += `🚛 *Costo de entrega:* GRATIS (Recogida en tienda)\n`;
     }
     
+    if (bankTransferSurcharge > 0) {
+      message += `🏦 *Recargo transferencia bancaria:* +${formatPriceWithCode(bankTransferSurcharge)} (${BANK_TRANSFER_SURCHARGE_PERCENT}%)\n`;
+    }
+    
     message += `---------------------------\n`;
     message += `💳 *TOTAL A PAGAR:* ${formatPriceWithCode(finalPriceToPay)}\n`;
     message += `💰 *Moneda:* ${currency.flag} ${currency.name} (${currency.code})\n`;
+    message += `💳 *Método de pago:* ${selectedPaymentMethod === PAYMENT_METHODS.CASH ? 'Efectivo 💵' : 'Transferencia Bancaria 🏦'}\n`;
     message += `---------------------------\n\n`;
     
     // Información adicional profesional
@@ -598,6 +626,8 @@ const CheckoutDetails = ({
           subtotal: totalAmountFromContext,
           deliveryCost,
           coupon: activeCoupon,
+          paymentMethod: selectedPaymentMethod,
+          bankTransferSurcharge,
           total: finalPriceToPay
         }
       });
@@ -671,6 +701,13 @@ const CheckoutDetails = ({
           </span>
           <Price amount={deliveryCost} />
         </div>
+
+        {bankTransferSurcharge > 0 && (
+          <div className={styles.row}>
+            <span>🏦 Recargo Transferencia Bancaria ({BANK_TRANSFER_SURCHARGE_PERCENT}%)</span>
+            <Price amount={bankTransferSurcharge} />
+          </div>
+        )}
       </div>
 
       <hr />
@@ -679,6 +716,20 @@ const CheckoutDetails = ({
         <span>💰 Precio Total</span>
         <Price amount={finalPriceToPay} />
       </div>
+
+      {selectedPaymentMethod === PAYMENT_METHODS.BANK_TRANSFER && (
+        <div className={styles.paymentMethodInfo}>
+          <div className={styles.bankTransferInfo}>
+            <h4>🏦 Información de Transferencia Bancaria</h4>
+            <p>Se incluye un recargo del {BANK_TRANSFER_SURCHARGE_PERCENT}% por costos de procesamiento bancario</p>
+            <div className={styles.bankDetails}>
+              <p><strong>Recargo aplicado:</strong> {formatPriceWithCode(bankTransferSurcharge)}</p>
+              <p><strong>Total con recargo:</strong> {formatPriceWithCode(finalPriceToPay)}</p>
+              <p><strong>Moneda:</strong> {currency.flag} {currency.name} ({currency.code})</p>
+            </div>
+          </div>
+        </div>
+      )}
 
       <button 
         onClick={handlePlaceOrder} 
@@ -693,7 +744,10 @@ const CheckoutDetails = ({
         ) : (
           <>
             <span className={styles.whatsappIcon}>📱</span>
-            Realizar Pedido por WhatsApp
+            {selectedPaymentMethod === PAYMENT_METHODS.CASH 
+              ? 'Realizar Pedido por WhatsApp (Efectivo)' 
+              : 'Realizar Pedido por WhatsApp (Transferencia)'
+            }
           </>
         )}
       </button>

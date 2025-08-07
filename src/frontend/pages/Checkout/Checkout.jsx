@@ -1,6 +1,7 @@
 import { useEffect, useRef, useState } from 'react';
 import { useAllProductsContext } from '../../contexts/ProductsContextProvider';
 import { useNavigate } from 'react-router';
+import { PAYMENT_METHODS } from '../../constants/constants';
 import {
   AddAddressBtn,
   AddressForm,
@@ -9,6 +10,7 @@ import {
   Title,
 } from '../../components';
 import CheckoutAddressCard from '../../components/CheckoutAddressCard/CheckoutAddressCard';
+import PaymentMethodSelector from '../../components/PaymentMethodSelector/PaymentMethodSelector';
 import styles from './Checkout.module.css';
 
 const Checkout = () => {
@@ -20,6 +22,7 @@ const Checkout = () => {
   const [activeAddressId, setActiveAddressId] = useState('');
   const [isCheckoutSuccess, setIsCheckoutSuccess] = useState(false);
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [selectedPaymentMethod, setSelectedPaymentMethod] = useState(PAYMENT_METHODS.CASH);
 
   const isCartEmpty = cartFromContext.length < 1;
 
@@ -43,6 +46,10 @@ const Checkout = () => {
 
   const updateCheckoutStatus = ({ showSuccessMsg }) => {
     setIsCheckoutSuccess(showSuccessMsg);
+  };
+
+  const handlePaymentMethodChange = (method) => {
+    setSelectedPaymentMethod(method);
   };
 
   const toggleModal = () => {
@@ -84,10 +91,17 @@ const Checkout = () => {
           ) : (
             <p className='text-center bold'>No hay direcciones para mostrar</p>
           )}
+
+          <PaymentMethodSelector
+            selectedMethod={selectedPaymentMethod}
+            onMethodChange={handlePaymentMethodChange}
+            totalAmount={cartFromContext.reduce((total, item) => total + (item.price * item.qty), 0)}
+          />
         </section>
 
         <CheckoutDetails
           activeAddressId={activeAddressId}
+          selectedPaymentMethod={selectedPaymentMethod}
           updateCheckoutStatus={updateCheckoutStatus}
           timer={timer}
         />

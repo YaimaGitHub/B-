@@ -111,6 +111,13 @@ export const SERVICE_TYPES = {
   PICKUP: 'pickup'
 };
 
+export const PAYMENT_METHODS = {
+  CASH: 'cash',
+  BANK_TRANSFER: 'bank_transfer'
+};
+
+export const BANK_TRANSFER_SURCHARGE_PERCENT = 20;
+
 // Zonas de Santiago de Cuba con costos de entrega - ACTUALIZADAS
 export const SANTIAGO_ZONES = [
   {
