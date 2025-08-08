@@ -450,7 +450,7 @@ export const STORE_MESSAGES = ${JSON.stringify(messages, null, 2)};
 
   return (
     <div className={styles.backupManager}>
-      <h2>🗂️ Sistema de Backup Completo - Yero Shop!</h2>
+      <h2>🗂️ Sistema de Backup Completo - <span className="yero-shop-text">Yero Shop!</span></h2>
       
       <div className={styles.infoSection}>
         <h3>ℹ️ Información del Sistema de Backup</h3>
