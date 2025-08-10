@@ -1,0 +1,370 @@
+.pdfGuideContainer {
+  position: relative;
+  margin: 1.5rem 0;
+}
+
+.mainButton {
+  width: 100%;
+  padding: 1rem 1.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: linear-gradient(135deg, #10b981, #059669);
+  border: none;
+  border-radius: var(--borderRadius);
+  color: var(--white);
+  font-weight: 600;
+  transition: var(--transition);
+  box-shadow: 0 4px 15px rgba(16, 185, 129, 0.3);
+  position: relative;
+  overflow: hidden;
+}
+
+.mainButton::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+  transition: left 0.5s;
+}
+
+.mainButton:hover:not(:disabled) {
+  background: linear-gradient(135deg, #059669, #047857);
+  transform: translateY(-2px);
+  box-shadow: 0 8px 25px rgba(16, 185, 129, 0.4);
+}
+
+.mainButton:hover:not(:disabled)::before {
+  left: 100%;
+}
+
+.mainButton:active:not(:disabled) {
+  transform: translateY(0);
+}
+
+.mainButton:disabled {
+  background: linear-gradient(135deg, var(--grey-400), var(--grey-500));
+  cursor: not-allowed;
+  box-shadow: none;
+}
+
+.icon {
+  font-size: 1.5rem;
+  margin-right: 0.75rem;
+  animation: bookFloat 3s ease-in-out infinite;
+}
+
+@keyframes bookFloat {
+  0%, 100% {
+    transform: translateY(0px) rotate(0deg);
+  }
+  50% {
+    transform: translateY(-5px) rotate(2deg);
+  }
+}
+
+.buttonText {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  text-align: left;
+}
+
+.mainText {
+  font-size: 1.1rem;
+  font-weight: 700;
+  margin-bottom: 0.25rem;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+.subText {
+  font-size: 0.85rem;
+  opacity: 0.9;
+  font-weight: 400;
+  font-style: italic;
+}
+
+.arrow {
+  font-size: 1.2rem;
+  transition: var(--transition);
+  margin-left: 0.5rem;
+}
+
+.loading {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  justify-content: center;
+  width: 100%;
+}
+
+.optionsMenu {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  right: 0;
+  background: var(--white);
+  border: 2px solid var(--green-medium);
+  border-radius: var(--borderRadius);
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+  z-index: 10;
+  overflow: hidden;
+  animation: slideDown 0.3s ease-out;
+}
+
+@keyframes slideDown {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.optionsHeader {
+  background: linear-gradient(135deg, var(--green-medium), #047857);
+  color: var(--white);
+  padding: 1rem;
+  text-align: center;
+}
+
+.optionsHeader h4 {
+  margin: 0;
+  font-size: 1rem;
+  font-weight: 600;
+}
+
+.optionButton {
+  width: 100%;
+  padding: 0;
+  border: none;
+  border-radius: 0;
+  background: var(--white);
+  color: var(--grey-800);
+  transition: var(--transition);
+  border-bottom: 1px solid var(--grey-200);
+}
+
+.optionButton:hover {
+  background: var(--green-50);
+  transform: none;
+  box-shadow: none;
+}
+
+.optionButton:last-of-type {
+  border-bottom: none;
+}
+
+.optionContent {
+  display: flex;
+  align-items: center;
+  padding: 1.25rem;
+  gap: 1rem;
+}
+
+.optionIcon {
+  font-size: 2rem;
+  flex-shrink: 0;
+}
+
+.optionText {
+  flex: 1;
+  text-align: left;
+}
+
+.optionText strong {
+  display: block;
+  font-size: 1rem;
+  margin-bottom: 0.25rem;
+  color: var(--primary-600);
+}
+
+.optionText small {
+  font-size: 0.85rem;
+  color: var(--grey-600);
+  line-height: 1.3;
+}
+
+.optionsFooter {
+  background: var(--grey-50);
+  padding: 0.75rem;
+  text-align: center;
+  border-top: 1px solid var(--grey-200);
+}
+
+.optionsFooter small {
+  color: var(--grey-600);
+  font-size: 0.8rem;
+}
+
+.infoBox {
+  margin-top: 1rem;
+  background: linear-gradient(135deg, var(--green-50), var(--green-100));
+  border: 2px solid var(--green-200);
+  border-radius: var(--borderRadius);
+  padding: 1rem;
+}
+
+.infoContent {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.75rem;
+}
+
+.infoIcon {
+  font-size: 1.5rem;
+  flex-shrink: 0;
+  margin-top: 0.25rem;
+}
+
+.infoText {
+  flex: 1;
+}
+
+.infoText strong {
+  display: block;
+  color: var(--green-dark);
+  margin-bottom: 0.5rem;
+  font-size: 1rem;
+}
+
+.infoText p {
+  margin: 0;
+  color: var(--green-dark);
+  font-size: 0.9rem;
+  line-height: 1.4;
+}
+
+.simpleButton {
+  padding: 0.75rem 1.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  font-weight: 600;
+  transition: var(--transition);
+}
+
+.simpleButton:hover:not(:disabled) {
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-3);
+}
+
+.simpleButton .icon {
+  font-size: 1.2rem;
+  margin: 0;
+  animation: none;
+}
+
+/* Efectos especiales para el botón principal */
+.mainButton {
+  position: relative;
+}
+
+.mainButton::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: radial-gradient(circle at center, rgba(255,255,255,0.1) 0%, transparent 70%);
+  opacity: 0;
+  transition: opacity 0.3s;
+}
+
+.mainButton:hover::after {
+  opacity: 1;
+}
+
+/* Animación de pulso para llamar la atención */
+.mainButton {
+  animation: gentlePulse 4s ease-in-out infinite;
+}
+
+@keyframes gentlePulse {
+  0%, 100% {
+    box-shadow: 0 4px 15px rgba(16, 185, 129, 0.3);
+  }
+  50% {
+    box-shadow: 0 6px 20px rgba(16, 185, 129, 0.5);
+  }
+}
+
+.mainButton:hover {
+  animation: none;
+}
+
+@media screen and (max-width: 768px) {
+  .mainButton {
+    padding: 0.875rem 1rem;
+  }
+
+  .buttonText {
+    align-items: center;
+    text-align: center;
+  }
+
+  .mainText {
+    font-size: 1rem;
+  }
+
+  .subText {
+    font-size: 0.8rem;
+  }
+
+  .optionContent {
+    padding: 1rem;
+    flex-direction: column;
+    text-align: center;
+    gap: 0.75rem;
+  }
+
+  .optionText {
+    text-align: center;
+  }
+
+  .optionIcon {
+    font-size: 1.5rem;
+  }
+
+  .infoContent {
+    flex-direction: column;
+    text-align: center;
+    gap: 0.5rem;
+  }
+
+  .infoIcon {
+    margin: 0;
+  }
+}
+
+@media screen and (max-width: 480px) {
+  .pdfGuideContainer {
+    margin: 1rem 0;
+  }
+
+  .mainButton {
+    padding: 0.75rem;
+  }
+
+  .icon {
+    font-size: 1.3rem;
+    margin-right: 0.5rem;
+  }
+
+  .mainText {
+    font-size: 0.95rem;
+  }
+
+  .subText {
+    font-size: 0.75rem;
+  }
+}

@@ -13,6 +13,27 @@
   font-weight: 600;
 }
 
+.helpSection {
+  margin: 2rem 0;
+  padding: 1.5rem;
+  background: linear-gradient(135deg, var(--green-50), var(--green-100));
+  border: 2px solid var(--green-200);
+  border-radius: var(--borderRadius);
+}
+
+.helpSection h4 {
+  margin: 0 0 0.75rem 0;
+  color: var(--green-dark);
+  font-size: 1.2rem;
+}
+
+.helpSection p {
+  margin: 0 0 1rem 0;
+  color: var(--green-dark);
+  font-size: 0.95rem;
+  line-height: 1.4;
+}
+
 @media screen and (min-width: 768px) {
   .row {
     font-size: 1rem;
@@ -27,5 +48,17 @@
   .profile {
     padding: 2rem;
     padding-top: 1rem;
+  }
+  
+  .helpSection {
+    padding: 2rem;
+  }
+  
+  .helpSection h4 {
+    font-size: 1.3rem;
+  }
+  
+  .helpSection p {
+    font-size: 1rem;
   }
 }
