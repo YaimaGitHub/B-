@@ -5,7 +5,6 @@ import {
   PasswordRow,
   Title,
 } from '../components';
-import PDFGuideButton from '../components/PDFGuideButton/PDFGuideButton';
 import {
   TEST_USER,
   SUPER_ADMIN,
@@ -129,9 +128,6 @@ const LoginPage = () => {
   return (
     <LoginAndSignupLayout>
       <Title>Iniciar Sesión</Title>
-
-      {/* Botón de guía PDF */}
-      <PDFGuideButton />
 
       <form onSubmit={(e) => handleSubmit(e, LOGIN_CLICK_TYPE.RegisterClick)}>
         <FormRow

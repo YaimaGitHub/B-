@@ -4,7 +4,6 @@ import {
   LoginAndSignupLayout,
   PasswordRow,
   Title,
-  PDFGuideButton,
 } from '../components';
 import { useFormInput, useNavigateIfRegistered } from '../hooks';
 import { setIntoLocalStorage, toastHandler } from '../utils/utils';
@@ -122,9 +121,6 @@ const SignupPage = () => {
   return (
     <LoginAndSignupLayout>
       <Title>Registrarse</Title>
-
-      {/* Botón de guía PDF */}
-      <PDFGuideButton variant="simple" />
 
       <form onSubmit={handleCreateAccount}>
         <FormRow

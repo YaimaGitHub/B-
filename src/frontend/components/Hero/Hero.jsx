@@ -3,7 +3,6 @@ import styles from './Hero.module.css';
 import jethalalBanner from '../../assets/lovepik.png';
 import { Link } from 'react-router-dom';
 import { useIsMobile } from '../../hooks';
-import PDFGuideButton from '../PDFGuideButton/PDFGuideButton';
 
 const Hero = () => {
   const isMobile = useIsMobile();

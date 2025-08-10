@@ -23,7 +23,6 @@ import Modal from './Modal/Modal';
 import Error from './Error/Error';
 import Loader from './Loader';
 import StoreLocationMap from './StoreLocationMap/StoreLocationMap';
-import PDFGuideButton from './PDFGuideButton/PDFGuideButton';
 
 export {
   Navbar,
@@ -51,5 +50,4 @@ export {
   Error,
   Loader,
   StoreLocationMap,
-  PDFGuideButton,
 };
