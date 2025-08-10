@@ -23,6 +23,17 @@
   text-transform: uppercase;
 }
 
+.heroActions {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  align-items: flex-start;
+}
+
+.guideButton {
+  margin: 0;
+}
+
 @media screen and (min-width: 768px) {
   .content h1 {
     font-size: 2.25rem;
@@ -31,6 +42,13 @@
   .content p {
     font-size: 0.95rem;
   }
+  
+  .heroActions {
+    flex-direction: row;
+    align-items: center;
+    gap: 1.5rem;
+  }
+  
   .imageContainer {
     display: block;
     width: 100%;
@@ -51,5 +69,9 @@
   }
   .imageContainer {
     margin-left: 0;
+  }
+  
+  .heroActions {
+    gap: 2rem;
   }
 }
