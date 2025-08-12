@@ -3,7 +3,7 @@ import { useConfigContext } from '../../contexts/ConfigContextProvider';
 import { useCurrencyContext } from '../../contexts/CurrencyContextProvider';
 import Price from '../Price';
 import styles from './CheckoutDetails.module.css';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { VscChromeClose } from 'react-icons/vsc';
 
 import { CHARGE_AND_DISCOUNT, ToastType, SERVICE_TYPES, PRODUCT_CATEGORY_ICONS } from '../../constants/constants';
@@ -12,6 +12,8 @@ import { toastHandler, Popper, generateOrderNumber } from '../../utils/utils';
 
 import { useAuthContext } from '../../contexts/AuthContextProvider';
 import { useNavigate } from 'react-router-dom';
+
+import PaymentMethodSelector from './PaymentMethodSelector';
 
 const CheckoutDetails = ({
   timer,
@@ -39,6 +41,8 @@ const CheckoutDetails = ({
   const [activeCoupon, setActiveCoupon] = useState(null);
   const [isProcessing, setIsProcessing] = useState(false);
 
+  const [selectedPaymentMethod, setSelectedPaymentMethod] = useState('cash');
+
   // Obtener la dirección seleccionada
   const selectedAddress = addressListFromContext.find(
     ({ addressId }) => addressId === activeAddressIdFromProps
@@ -49,15 +53,55 @@ const CheckoutDetails = ({
     ? (selectedAddress?.deliveryCost || 0)
     : 0;
 
-  // Calcular descuento del cupón según la moneda seleccionada
+  // Calcular descuento del cupón
   const priceAfterCouponApplied = activeCoupon
     ? -Math.floor((totalAmountFromContext * activeCoupon.discountPercent) / 100)
     : 0;
+
+  // CALCULAR RECARGO POR TRANSFERENCIA MEJORADO
+  const calculateTransferFees = () => {
+    if (selectedPaymentMethod !== 'transfer') return 0;
+    
+    return cartFromContext.reduce((totalFee, item) => {
+      const paymentType = item.paymentType || 'both';
+      const transferFeePercentage = item.transferFeePercentage || 5;
+      
+      // Solo aplicar recargo si el producto permite transferencia
+      if (paymentType === 'transfer' || paymentType === 'both') {
+        const itemTotal = item.price * item.qty;
+        const fee = (itemTotal * transferFeePercentage) / 100;
+        return totalFee + fee;
+      }
+      
+      return totalFee;
+    }, 0);
+  };
+
+  // CALCULAR SUBTOTAL DE PRODUCTOS QUE ACEPTAN TRANSFERENCIA
+  const calculateTransferSubtotal = () => {
+    if (selectedPaymentMethod !== 'transfer') return totalAmountFromContext;
+    
+    return cartFromContext.reduce((subtotal, item) => {
+      const paymentType = item.paymentType || 'both';
+      
+      // Solo incluir productos que aceptan transferencia
+      if (paymentType === 'transfer' || paymentType === 'both') {
+        const itemTotal = item.price * item.qty;
+        return subtotal + itemTotal;
+      }
+      
+      return subtotal;
+    }, 0);
+  };
+
+  const transferFees = calculateTransferFees();
+  const transferSubtotal = calculateTransferSubtotal();
 
   const finalPriceToPay =
     totalAmountFromContext +
     deliveryCost +
     CHARGE_AND_DISCOUNT.discount +
+    transferFees +
     priceAfterCouponApplied;
 
   const updateActiveCoupon = (couponObjClicked) => {
@@ -76,6 +120,37 @@ const CheckoutDetails = ({
     toastHandler(ToastType.Warn, `🗑️ Cupón removido - Descuento cancelado`);
     setActiveCoupon(null);
   };
+
+  // VERIFICAR QUÉ MÉTODOS DE PAGO ESTÁN DISPONIBLES
+  const getAvailablePaymentMethods = () => {
+    const methods = { cash: false, transfer: false };
+    
+    cartFromContext.forEach(item => {
+      const paymentType = item.paymentType || 'both';
+      
+      if (paymentType === 'cash' || paymentType === 'both') {
+        methods.cash = true;
+      }
+      if (paymentType === 'transfer' || paymentType === 'both') {
+        methods.transfer = true;
+      }
+    });
+    
+    return methods;
+  };
+
+  const availablePaymentMethods = getAvailablePaymentMethods();
+
+  // Ajustar método de pago seleccionado si no está disponible
+  useEffect(() => {
+    if (!availablePaymentMethods.cash && !availablePaymentMethods.transfer) {
+      setSelectedPaymentMethod('cash'); // fallback
+    } else if (!availablePaymentMethods.cash && availablePaymentMethods.transfer) {
+      setSelectedPaymentMethod('transfer');
+    } else if (availablePaymentMethods.cash && !availablePaymentMethods.transfer) {
+      setSelectedPaymentMethod('cash');
+    }
+  }, [availablePaymentMethods.cash, availablePaymentMethods.transfer]);
 
   // Función para obtener icono según categoría del producto
   const getProductIcon = (category) => {
@@ -408,6 +483,27 @@ const CheckoutDetails = ({
     message += `🆔 *Número de Pedido:* #${orderNumber}\n`;
     message += `💰 *Moneda seleccionada:* ${currency.flag} ${currency.name} (${currency.code})\n\n`;
     
+    // Información del método de pago seleccionado con desglose completo
+    message += `---------------------\n`;
+    message += `💳 *MÉTODO DE PAGO SELECCIONADO*\n`;
+    message += `---------------------\n`;
+    message += `💰 *Método elegido:* ${selectedPaymentMethod === 'cash' ? 'Pago en Efectivo' : 'Transferencia Bancaria'}\n`;
+    
+    // DESGLOSE DETALLADO PARA TRANSFERENCIA BANCARIA
+    if (selectedPaymentMethod === 'transfer') {
+      message += `\n📊 *DESGLOSE DETALLADO DE TRANSFERENCIA:*\n`;
+      message += `📦 *Subtotal productos:* ${formatPriceWithCode(transferSubtotal)}\n`;
+      if (transferFees > 0) {
+        message += `💳 *Recargo por transferencia:* ${formatPriceWithCode(transferFees)}\n`;
+        message += `💰 *Total con transferencia:* ${formatPriceWithCode(transferSubtotal + transferFees)}\n`;
+      }
+      message += `💱 *Moneda de cálculo:* ${currency.flag} ${currency.name} (${currency.code})\n`;
+      if (currency.code !== 'CUP') {
+        message += `🔄 *Tasa de conversión aplicada:* 1 ${currency.code} = ${currency.rate.toLocaleString()} CUP\n`;
+      }
+    }
+    message += `\n`;
+    
     // Información del servicio con mejor formato
     message += `---------------------\n`;
     message += `🚛 *DETALLES DE ENTREGA*\n`;
@@ -446,19 +542,49 @@ const CheckoutDetails = ({
       const colorName = getColorName(colorCode);
       const subtotal = item.price * item.qty;
       
+      // Calcular precio según método de pago
+      const paymentType = item.paymentType || 'both';
+      const transferFeePercentage = item.transferFeePercentage || 5;
+      let finalItemPrice = item.price;
+      let itemTransferFee = 0;
+      
+      if (selectedPaymentMethod === 'transfer' && (paymentType === 'transfer' || paymentType === 'both')) {
+        itemTransferFee = (item.price * transferFeePercentage) / 100;
+        finalItemPrice = item.price + itemTransferFee;
+      }
+      
+      const finalSubtotal = finalItemPrice * item.qty;
+      
       message += `${index + 1}. ${productIcon} *${item.name}*\n`;
       message += `   🎨 *Color:* ${colorName}\n`;
       message += `   🔢 *Cantidad:* ${item.qty} unidad${item.qty > 1 ? 'es' : ''}\n`;
       message += `   💲 *Precio unitario:* ${formatPriceWithCode(item.price)}\n`;
+      if (selectedPaymentMethod === 'transfer' && itemTransferFee > 0) {
+        message += `   💳 *Recargo transferencia (${transferFeePercentage}%):* ${formatPriceWithCode(itemTransferFee)}\n`;
+        message += `   💰 *Precio final unitario:* ${formatPriceWithCode(finalItemPrice)}\n`;
+      }
+      message += `   💳 *Método de pago del producto:* ${paymentType === 'cash' ? 'Solo Efectivo' : paymentType === 'transfer' ? 'Solo Transferencia' : 'Efectivo y Transferencia'}\n`;
       message += `   💰 *Subtotal:* ${formatPriceWithCode(subtotal)}\n`;
+      if (selectedPaymentMethod === 'transfer' && itemTransferFee > 0) {
+        message += `   💰 *Subtotal con transferencia:* ${formatPriceWithCode(finalSubtotal)}\n`;
+      }
       message += `   ─────────────────────────────\n`;
     });
     
-    // Resumen financiero profesional MEJORADO Y ORGANIZADO
+    // Resumen financiero profesional MEJORADO CON DESGLOSE COMPLETO
     message += `\n---------------------------\n`;
     message += `💼 *RESUMEN FINANCIERO DETALLADO*\n`;
     message += `---------------------------\n`;
-    message += `📦 *Subtotal productos:* ${formatPriceWithCode(totalAmountFromContext)}\n`;
+    
+    if (selectedPaymentMethod === 'transfer') {
+      message += `📦 *Subtotal productos (transferencia):* ${formatPriceWithCode(transferSubtotal)}\n`;
+      if (transferFees > 0) {
+        message += `💳 *Recargo por transferencia:* ${formatPriceWithCode(transferFees)}\n`;
+        message += `💰 *Total productos con transferencia:* ${formatPriceWithCode(transferSubtotal + transferFees)}\n`;
+      }
+    } else {
+      message += `📦 *Subtotal productos (efectivo):* ${formatPriceWithCode(totalAmountFromContext)}\n`;
+    }
     
     if (activeCoupon) {
       message += `🏷️ *Descuento aplicado:*\n`;
@@ -473,9 +599,16 @@ const CheckoutDetails = ({
       message += `🚛 *Costo de entrega:* GRATIS (Recogida en tienda)\n`;
     }
     
+    if (transferFees > 0) {
+      message += `💳 *Recargo por transferencia:* ${formatPriceWithCode(transferFees)}\n`;
+    }
+    
     message += `---------------------------\n`;
     message += `💳 *TOTAL A PAGAR:* ${formatPriceWithCode(finalPriceToPay)}\n`;
     message += `💰 *Moneda:* ${currency.flag} ${currency.name} (${currency.code})\n`;
+    if (currency.code !== 'CUP') {
+      message += `🔄 *Tasa aplicada:* 1 ${currency.code} = ${currency.rate.toLocaleString()} CUP\n`;
+    }
     message += `---------------------------\n\n`;
     
     // Información adicional profesional
@@ -636,15 +769,36 @@ const CheckoutDetails = ({
         updateActiveCoupon={updateActiveCoupon}
       />
 
+      <PaymentMethodSelector
+        selectedPaymentMethod={selectedPaymentMethod}
+        setSelectedPaymentMethod={setSelectedPaymentMethod}
+        availablePaymentMethods={availablePaymentMethods}
+        cartItems={cartFromContext}
+      />
+
       <hr />
 
       <div className={styles.priceBreakdown}>
         <div className={styles.row}>
           <span>
-            🛍️ Precio ({totalCountFromContext} artículo{totalCountFromContext > 1 && 's'})
+            🛍️ {selectedPaymentMethod === 'transfer' ? 'Subtotal productos con transferencia' : 'Precio'} ({totalCountFromContext} artículo{totalCountFromContext > 1 && 's'})
           </span>
-          <Price amount={totalAmountFromContext} />
+          <Price amount={selectedPaymentMethod === 'transfer' ? transferSubtotal : totalAmountFromContext} />
         </div>
+
+        {selectedPaymentMethod === 'transfer' && transferFees > 0 && (
+          <div className={styles.row}>
+            <span>💳 Recargo por transferencia (automático)</span>
+            <Price amount={transferFees} />
+          </div>
+        )}
+
+        {selectedPaymentMethod === 'transfer' && transferSubtotal + transferFees !== totalAmountFromContext && (
+          <div className={styles.row}>
+            <span>💰 Total productos con transferencia</span>
+            <Price amount={transferSubtotal + transferFees} />
+          </div>
+        )}
 
         {activeCoupon && (
           <div className={styles.row}>
@@ -676,7 +830,7 @@ const CheckoutDetails = ({
       <hr />
 
       <div className={`${styles.row} ${styles.totalPrice}`}>
-        <span>💰 Precio Total</span>
+        <span>💰 Precio Total ({selectedPaymentMethod === 'cash' ? 'Efectivo' : 'Transferencia'})</span>
         <Price amount={finalPriceToPay} />
       </div>
 
