@@ -648,15 +648,14 @@
         "featured": true,
         "isShippingAvailable": true,
         "canUseCoupons": false,
-        "paymentType": "cash",
-        "transferFeePercentage": 5,
+        "paymentType": "both",
+        "transferFeePercentage": 10,
         "colors": [
           {
             "color": "#8000ff",
             "colorQuantity": 1
           }
-        ],
-        "id": "52"
+        ]
       },
       {
         "_id": "265c014c-095c-4fe5-b99b-e1b70e569a21",
@@ -756,7 +755,7 @@
       }
     ],
     "categories": [],
-    "lastModified": "2025-08-12T09:27:53.654Z"
+    "lastModified": "2025-08-13T00:23:46.435Z"
   },
   "products": [
     {
@@ -1272,15 +1271,14 @@
       "featured": true,
       "isShippingAvailable": true,
       "canUseCoupons": false,
-      "paymentType": "cash",
-      "transferFeePercentage": 5,
+      "paymentType": "both",
+      "transferFeePercentage": 10,
       "colors": [
         {
           "color": "#8000ff",
           "colorQuantity": 1
         }
-      ],
-      "id": "52"
+      ]
     },
     {
       "_id": "265c014c-095c-4fe5-b99b-e1b70e569a21",
@@ -1381,7 +1379,7 @@
   ],
   "categories": [],
   "messages": {},
-  "exportDate": "2025-08-12T09:28:58.212Z",
+  "exportDate": "2025-08-13T00:24:29.692Z",
   "version": "2.1.0",
   "storeInfo": {
     "storeName": "Yero Shop!",
@@ -1517,5 +1515,5 @@
       "cost": 200
     }
   ],
-  "lastModified": "2025-08-12T09:27:58.220Z"
+  "lastModified": "2025-08-13T00:23:51.610Z"
 }

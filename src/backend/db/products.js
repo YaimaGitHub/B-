@@ -517,15 +517,14 @@ export const products = [
     "featured": true,
     "isShippingAvailable": true,
     "canUseCoupons": false,
-    "paymentType": "cash",
-    "transferFeePercentage": 5,
+    "paymentType": "both",
+    "transferFeePercentage": 10,
     "colors": [
       {
         "color": "#8000ff",
         "colorQuantity": 1
       }
-    ],
-    "id": "52"
+    ]
   },
   {
     "_id": "265c014c-095c-4fe5-b99b-e1b70e569a21",
